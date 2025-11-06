@@ -1,5 +1,7 @@
 {
   inputs,
+  lib,
+  machine,
 	config,
   pkgs,
   ...
@@ -11,6 +13,7 @@
 	imports = [ 
     inputs.zen-browser.homeModules.twilight
     ./programs
+    (lib.mkIf (machine == "nixel")) ./hyprland
   ];
 	programs.zen-browser = {
 		enable = true;

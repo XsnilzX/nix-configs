@@ -20,9 +20,10 @@
     ...
   }: {
    # Definieren der Maschinen-Konfigurationen
-    nixosConfigurations = rec {
+    nixosConfigurations =  {
       nixes-test = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { machine = "nixes-test"; inherit self inputs; };
         modules = [
           ./machines/nix-test/configuration.nix
           home-manager.nixosModules.home-manager
@@ -33,7 +34,7 @@
               useUserPackages = true;
               users.xsnilzx = import ./home/home.nix;
               backupFileExtension = "backup";
-              extraSpecialArgs = { inherit inputs; };
+              extraSpecialArgs = { machine = "nixes-test"; inherit inputs; };
             };
           }
         ];
@@ -41,6 +42,7 @@
 
       nixel = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { machine = "nixel"; inherit self inputs; };
         modules = [
           ./machines/nixel/configuration.nix
           home-manager.nixosModules.home-manager
@@ -51,7 +53,7 @@
               useUserPackages = true;
               users.xsnilzx = import ./home/home.nix;
               backupFileExtension = "backup";
-              extraSpecialArgs = { inherit inputs; };
+              extraSpecialArgs = { machine = "nixel"; inherit inputs; };
             };
           }
         ];

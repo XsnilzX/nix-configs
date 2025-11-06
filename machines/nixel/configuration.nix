@@ -18,8 +18,8 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  networking.hostName = "nixel"; # Define your hostname.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.hostName = "nixel";
+  networking.networkmanager.enable = true;
 
   services = {
     desktopManager.plasma6.enable = true;
