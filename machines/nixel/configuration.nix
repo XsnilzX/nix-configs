@@ -22,10 +22,6 @@
   networking.networkmanager.enable = true;
 
   services = {
-    desktopManager.plasma6.enable = true;
-
-    displayManager.sddm.enable = true;
-
-    displayManager.sddm.wayland.enable = true;
+    udisks2.enable = true;
   };
 }

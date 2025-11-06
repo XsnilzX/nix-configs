@@ -4,10 +4,25 @@
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      monitor = "eDP-1,1920x1080@60,0x0,1";
+      monitor = "DP-1,2880x1800@120,0x0,1";
+
+      # default programs
+      "$mainMod" = "SUPER";
+      "$terminal" = "ghostty";
+      "$fileManager" = "thunar";
+      "$menu" = "anyrun";
+      "$browser" = "zen-browser";
+      "$mail" = "thunderbird";
+      "$code" = "vscodium --ozone-platform=wayland";
+
+      # am anfang starten
       exec-once = [
-        "waybar"
-        "nm-applet --indicator"
+        "hypridle"
+        "nm-applet --indicator & blueman-applet"
+        "waybar & hyprpaper"
+        "systemctl --user start hyprpolkitagent"
+        "swaync"
+        "udiskie"
       ];
       input = {
         kb_layout = "de";
@@ -58,12 +73,23 @@
     };
   };
 
+  services.hyprpolkitagent.enable = true;
+  services.udiskie.enable = true;
+
   home.packages = with pkgs; [
     waybar
     hyprpaper
     hyprpicker
     hyprshot
   ];
+
+  programs.hyprshot = {
+    enable = true;
+    saveLocation = "$HOME/Bilder/Screenshots";
+  };
+
+  services.blueman.enable = true;
+  services.blueman-applet.enable = true;
 
   # Beispiel: Hyprland Autostart
   home.sessionVariables = {
