@@ -6,7 +6,7 @@
       shellAliases = {
         btw = "echo I use nixos, btw";
         ls = "eza -la --color=always --icons=always --hyperlink";
-        nixrebuild = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixes-test";
+        nixrebuild = "sudo nixos-rebuild switch --flake ~/nixo-configs#nixes-test";
         nixupdate = "sudo nix flake update";
       };
     };
