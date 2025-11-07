@@ -13,8 +13,7 @@
 	imports = [ 
     inputs.zen-browser.homeModules.twilight
     ./programs
-    (lib.mkIf (machine == "nixel") ./hyprland)
-  ];
+  ]++ lib.optionals (machine == "nixel") [ ./hyprland ];
 	programs.zen-browser = {
 		enable = true;
 		languagePacks = [ "de" "en-US" ];
@@ -25,7 +24,7 @@
     languagePacks = [ "de" ];
     policies  = {
       ShowHomeButton = true;
-      DefaultDownloadDirectory  = "\${home}/Downloads";
+      DefaultDownloadDirectory = "${config.home.homeDirectory}/Downloads";
       DisableTelemetry = true;
       ExtensionSettings = {
         "Bitwarden" = {
