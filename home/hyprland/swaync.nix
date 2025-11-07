@@ -2,36 +2,36 @@
     services.swaync = {
         enable = true;
         settings = {
-            "positionX": "right",
-            "positionY": "top",
-            "layer": "overlay",
-            "control-center-margin-top": 50,
-            "notification-outer-margin": 10,
-            "notification-margin-left": 16,
-            "notification-margin-right": 16,
-            "notification-outer-padding": 8,
-            "notification-corner-radius": 20,
-            "notification-font": "JetBrainsMono Nerd Font 13",
-            "notification-background": "#2b2b3bcc",
-            "notification-foreground": "#cdd6f4",
-            "notification-border-color": "#585b70cc",
-            "notification-border-size": 2,
-            "notification-icon-size": 48,
-            "notification-default-timeout": 5000,
-            "timeout-low": 10000,
-            "timeout-critical": 0,
-            "notification-critical-background": "#eb937dcc",
-            "notification-critical-foreground": "#ffffff",
-            "notification-critical-border-color": "#ff0000cc",
-            "enable-transparency": true,
-            "transparency": 0.8,
-            "width-percentage": 35,
-            "control-center-width-percentage": 40,
-            "control-center-height-percentage": 60,
-            "image-visibility": true,
-            "control-center-corner-radius": 20,
-            "transition-time": 200,
-            "hide-on-clear": false
+            positionX = "right";
+            positionY = "top";
+            layer = "overlay";
+            control-center-margin-top = 50;
+            notification-outer-margin = 10;
+            notification-margin-left = 16;
+            notification-margin-right = 16;
+            notification-outer-padding = 8;
+            notification-corner-radius = 20;
+            notification-font = "JetBrainsMono Nerd Font 13";
+            notification-background = "#2b2b3bcc";
+            notification-foreground = "#cdd6f4";
+            notification-border-color = "#585b70cc";
+            notification-border-size = 2;
+            notification-icon-size = 48;
+            notification-default-timeout = 5000;
+            timeout-low = 10000;
+            timeout-critical = 0;
+            notification-critical-background = "#eb937dcc";
+            notification-critical-foreground = "#ffffff";
+            notification-critical-border-color = "#ff0000cc";
+            enable-transparency = true;
+            transparency = 0.8;
+            width-percentage = 35;
+            control-center-width-percentage = 40;
+            control-center-height-percentage = 60;
+            image-visibility = true;
+            control-center-corner-radius = 20;
+            transition-time = 200;
+            hide-on-clear = false;
         };
         style = ''
             /* === swaync notification styling === */

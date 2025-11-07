@@ -1,8 +1,8 @@
+{ pkgs, ... }:
 {
     programs.wleave = {
         enable = true;
         settings = {
-            {
             buttons-per-row = "2/2";
             delay-commands-ms = 100;
             buttons = [
@@ -35,7 +35,6 @@
                 icon = "${pkgs.wleave}/share/wleave/icons/reboot.svg";
                 }
             ];
-            }
         };
         style = ''
             window {
