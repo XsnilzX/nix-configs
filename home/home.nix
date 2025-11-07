@@ -13,7 +13,7 @@
 	imports = [ 
     inputs.zen-browser.homeModules.twilight
     ./programs
-    (lib.mkIf (machine == "nixel")) ./hyprland
+    (lib.mkIf (machine == "nixel") ./hyprland)
   ];
 	programs.zen-browser = {
 		enable = true;
