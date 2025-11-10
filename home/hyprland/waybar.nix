@@ -106,7 +106,108 @@
             }
         '';
         settings = {
-            # Adding config!
+            "layer": "top",
+            "position": "top",
+            "height": 30,
+
+            // Wir zeigen jetzt nur 3 Container-Module an
+            "modules-left": ["hyprland/workspaces"],
+            "modules-center": ["clock", "custom/weather"],
+            "modules-right": 
+            [
+                "cpu", "memory", "battery", "backlight", "pulseaudio",
+                "power-profiles-daemon", "custom/notification", "custom/separator",
+                "tray", "custom/exit"
+            ],
+            "clock": {
+                "format": " {:%H:%M}",
+                "tooltip": false,
+            },
+            "cpu": {
+                "interval": 1,
+                "format": "{usage}%",
+            },
+            "memory": {
+                "interval": 2,
+                "format": "{used:0.1f}GB",
+            },
+            "battery": {
+                "format": "{capacity}%",
+                "format-charging": "{capacity}%",
+                "format-plugged": "{capacity}%",
+            },
+            "backlight": {
+                "format": "{percent}%",
+            },
+            "custom/weather": {
+                "exec": "uv run --directory=/home/xsnilzx/Git/weather-widget main.py",
+                "return-type": "json",
+                "interval": 120, // alle 2 Minuten aktualisieren
+                "format": "{}",
+                "tooltip": true,
+            },
+            "pulseaudio": {
+                "format": "{volume}% {icon} {format_source}",
+                "format-muted": " {format_source}",
+                "format-source": "{volume}% ",
+                "format-source-muted": "",
+                "format-bluetooth": "{volume}% {icon} {format_source}",
+                "format-bluetooth-muted": " {icon} {format_source}",
+                "format-icons": {
+                "default": ["", "", ""],
+                "headphone": "",
+                "headset": "",
+                "hands-free": "",
+                "phone": "",
+                "portable": "",
+                "car": ""
+                },
+                "on-click": "pavucontrol"
+            },
+            "tray": {
+                "spacing": 5,
+                "icon-size": 18,
+                "items": ["nm-applet", "blueman-applet"],
+                "tooltip": false,
+            },
+            "custom/separator": {
+                "format": "|",
+                "tooltip": false,
+            },
+            "custom/exit": {
+                "format": "⏻",
+                "on-click": "wlogout",
+                "tooltip": false,
+            },
+            "power-profiles-daemon": {
+                "format": "{icon}",
+                "tooltip-format": "Power Profile: {icon} {profile}",
+                "format-icons": {
+                "performance": "",
+                "balanced": "",
+                "power-saver": ""
+                }
+            },
+            "custom/notification": {
+                "tooltip": false,
+                "format": "{icon}",
+                "format-icons": {
+                "notification": "<span foreground='red'><sup></sup></span>",
+                "none": "",
+                "dnd-notification": "<span foreground='red'><sup></sup></span>",
+                "dnd-none": "",
+                "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+                "inhibited-none": "",
+                "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+                "dnd-inhibited-none": ""
+                },
+                "return-type": "json",
+                "exec-if": "which swaync-client",
+                "exec": "swaync-client -swb",
+                "on-click": "swaync-client -t -sw",
+                "on-click-right": "swaync-client -d -sw",
+                "escape": true
+            },
         };
     };
 }
