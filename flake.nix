@@ -6,11 +6,11 @@
       url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-		zen-browser = {
-			url = "github:0xc000022070/zen-browser-flake";
-			inputs.nixpkgs.follows = "nixpkgs";
-			inputs.home-manager.follows = "home-manager";
-		};
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs = inputs @ {
@@ -19,11 +19,14 @@
     home-manager,
     ...
   }: {
-   # Definieren der Maschinen-Konfigurationen
+    # Definieren der Maschinen-Konfigurationen
     nixosConfigurations = {
       nixes-test = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { machine = "nixes-test"; inherit self inputs; };
+        specialArgs = {
+          machine = "nixes-test";
+          inherit self inputs;
+        };
         modules = [
           ./machines/nix-test/configuration.nix
           home-manager.nixosModules.home-manager
@@ -34,7 +37,10 @@
               useUserPackages = true;
               users.xsnilzx = import ./home/home.nix;
               backupFileExtension = "backup";
-              extraSpecialArgs = { machine = "nixes-test"; inherit inputs; };
+              extraSpecialArgs = {
+                machine = "nixes-test";
+                inherit inputs;
+              };
             };
           }
         ];
@@ -42,7 +48,10 @@
 
       nixel = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { machine = "nixel"; inherit self inputs; };
+        specialArgs = {
+          machine = "nixel";
+          inherit self inputs;
+        };
         modules = [
           ./machines/nixel/configuration.nix
           home-manager.nixosModules.home-manager
@@ -53,7 +62,10 @@
               useUserPackages = true;
               users.xsnilzx = import ./home/home.nix;
               backupFileExtension = "backup";
-              extraSpecialArgs = { machine = "nixel"; inherit inputs; };
+              extraSpecialArgs = {
+                machine = "nixel";
+                inherit inputs;
+              };
             };
           }
         ];

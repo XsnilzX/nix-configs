@@ -1,6 +1,6 @@
 {pkgs, ...}: {
   # Editor Setup
-  
+
   programs.helix = {
     enable = true;
     settings = {
@@ -53,6 +53,6 @@
 
   programs.zed-editor = {
     enable = true;
-		extensions = [ "nix" "dracula" "typst" ];
+    extensions = ["nix" "dracula" "typst"];
   };
 }

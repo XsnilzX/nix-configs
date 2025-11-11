@@ -1,11 +1,14 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.anyrun = {
     enable = true;
     config = {
-      x = { fraction = 0.5; };
-      y = { fraction = 0.3; };
-      width = { fraction = 0.3; };
+      x = {fraction = 0.5;};
+      y = {fraction = 0.3;};
+      width = {fraction = 0.3;};
       hideIcons = false;
       ignoreExclusiveZones = false;
       layer = "overlay";
@@ -27,11 +30,15 @@
 
     # Inline comments are supported for language injection into
     # multi-line strings with Treesitter! (Depends on your editor)
-    extraCss = /*css */ ''
-      .some_class {
-        background: red;
-      }
-    '';
+    extraCss =
+      /*
+      css
+      */
+      ''
+        .some_class {
+          background: red;
+        }
+      '';
 
     extraConfigFiles."applications.ron".text = ''
       // <Anyrun config dir>/applications.ron
@@ -103,7 +110,7 @@
         // )
         //
         // NOTE: `{}` is replaced by the search query and `https://` is automatically added in front.
-        engines: [DuckDuckGo] 
+        engines: [DuckDuckGo]
       )
     '';
 
