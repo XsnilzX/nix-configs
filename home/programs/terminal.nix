@@ -20,7 +20,7 @@
         theme = "Dracula";
         font-size = 12;
         font-family = "JetBrainsMono Nerd Font Mono";
-        background-opacity = 0.9;
+        background-opacity = 0.6;
       };
     };
   };
