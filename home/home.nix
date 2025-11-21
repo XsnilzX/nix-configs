@@ -15,7 +15,7 @@
       inputs.zen-browser.homeModules.twilight
       ./programs
     ]
-    ++ lib.optionals (machine == "nixel") [./hyprland];
+    ++ lib.optionals (machine == "nixspo") [./hyprland];
   programs.zen-browser = {
     enable = true;
     languagePacks = ["de" "en-US"];

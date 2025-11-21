@@ -7,7 +7,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zen-browser = {
@@ -21,6 +25,7 @@
     self,
     nixpkgs,
     home-manager,
+    sops-nix,
     ...
   }: {
     # Definieren der Maschinen-Konfigurationen
@@ -28,11 +33,12 @@
       nixes-test = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          machine = "nixes-test";
+          machine = "nixhael";
           inherit self inputs;
         };
         modules = [
-          ./machines/nix-test/configuration.nix
+          ./machines/nixhael/configuration.nix
+          sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
@@ -42,7 +48,7 @@
               users.xsnilzx = import ./home/home.nix;
               backupFileExtension = "backup";
               extraSpecialArgs = {
-                machine = "nixes-test";
+                machine = "nixhael";
                 inherit inputs;
               };
             };
@@ -53,11 +59,12 @@
       nixel = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          machine = "nixel";
+          machine = "nixspo";
           inherit self inputs;
         };
         modules = [
-          ./machines/nixel/configuration.nix
+          ./machines/nixspo/configuration.nix
+          sops-nix.nixosModules.sops
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
@@ -67,7 +74,7 @@
               users.xsnilzx = import ./home/home.nix;
               backupFileExtension = "backup";
               extraSpecialArgs = {
-                machine = "nixel";
+                machine = "nixspo";
                 inherit inputs;
               };
             };
