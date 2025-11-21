@@ -1,0 +1,27 @@
+keys:
+  - &nixhael age1qlcw2yfwdyhcck8hc868rhy4zttj7s7syj9zgzy7gyj9nd28cafsea5a2u
+  - &nixspo age1tqaq3s7vzncvp3dr4kefwmltfw40423w6t58f43snmqdfmwjxe0qafsdhw
+  - &backup age1ctrh545yzm2y5v6rmn5adrpmtnqpprqnk6g99pdu7nn7zchw2g6qy0eeqz
+
+creation_rules:
+  # SSH-Schlüssel für nixhael: Nur mit *nixhael verschlüsselt
+  - path_regex: secrets/nixhael\.yaml$
+    key_groups:
+      - age:
+          - *nixhael
+          - *backup
+
+  # SSH-Schlüssel für nixspo: Nur mit *nixspo verschlüsselt
+  - path_regex: secrets/nixspo\.yaml$
+    key_groups:
+      - age:
+          - *nixspo
+          - *backup
+
+  # Passwort (für beide Systeme): Mit beiden Keys verschlüsselt
+  - path_regex: secrets/share\.yaml$
+    key_groups:
+      - age:
+          - *nixhael
+          - *nixspo
+          - *backup

@@ -28,7 +28,6 @@
     sops-nix,
     ...
   }: {
-    # Definieren der Maschinen-Konfigurationen
     nixosConfigurations = {
       nixhael = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

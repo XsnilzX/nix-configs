@@ -38,6 +38,7 @@
     wget
     kdePackages.partitionmanager
     prismlauncher
+    lmstudio
   ];
 
   fonts.packages = with pkgs; [
