@@ -30,7 +30,7 @@
   }: {
     # Definieren der Maschinen-Konfigurationen
     nixosConfigurations = {
-      nixes-test = nixpkgs.lib.nixosSystem {
+      nixhael = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           machine = "nixhael";
@@ -56,7 +56,7 @@
         ];
       };
 
-      nixel = nixpkgs.lib.nixosSystem {
+      nixspo = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           machine = "nixspo";
