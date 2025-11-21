@@ -1,8 +1,10 @@
 {pkgs, ...}: {
   programs.git = {
     enable = true;
-    user.Name = "Richard Taesler";
-    user.Email = "officiall.xdragonyt@gmail.com";
+    settings = {
+      user.name = "Richard Taesler";
+      user.email = "officiall.xdragonyt@gmail.com";
+    };
     lfs.enable = true;
   };
 }
