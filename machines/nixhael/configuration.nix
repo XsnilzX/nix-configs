@@ -8,6 +8,7 @@
   imports = [
     ./hardware-configuration.nix
     ./../share.nix
+    ./../../modules/sops/nixhael.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
