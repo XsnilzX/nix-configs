@@ -27,7 +27,7 @@ in
       "github" = {
         hostname = "github.com";
         user = "git";
-        identityFile = "${sshPath}/github_key";
+        identityFile = "${sshPath}/github";
         identitiesOnly = true;
       };
       "biggi" = {
