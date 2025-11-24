@@ -9,17 +9,59 @@
       neededForUsers = true;
     };
     
-    "ssh_keys/personal/private" = {
+    "ssh_keys/biggi/private" = {
       sopsFile = ../../secrets/nixspo.yaml;
       owner = config.users.users.xsnilzx.name;
-      path = "/home/xsnilzx/.ssh/id_ed25519";
+      path = "/home/xsnilzx/.ssh/biggi";
       mode = "0600";
     };
     
-    "ssh_keys/github/private" = {
+    "ssh_keys/github_key/private" = {
       sopsFile = ../../secrets/nixspo.yaml;
       owner = config.users.users.xsnilzx.name;
-      path = "/home/xsnilzx/.ssh/id_ed25519_github";
+      path = "/home/xsnilzx/.ssh/github_key";
+      mode = "0600";
+    };
+
+    "ssh_keys/gitlab_finf/private" = {
+      sopsFile = ../../secrets/nixspo.yaml;
+      owner = config.users.users.xsnilzx.name;
+      path = "/home/xsnilzx/.ssh/gitlab_finf";
+      mode = "0600";
+    };
+
+    "ssh_keys/gitlab_unihannover/private" = {
+      sopsFile = ../../secrets/nixspo.yaml;
+      owner = config.users.users.xsnilzx.name;
+      path = "/home/xsnilzx/.ssh/gitlab_unihannover";
+      mode = "0600";
+    };
+
+    "ssh_keys/home34b_key/private" = {
+      sopsFile = ../../secrets/nixspo.yaml;
+      owner = config.users.users.xsnilzx.name;
+      path = "/home/xsnilzx/.ssh/home34b_key";
+      mode = "0600";
+    };
+
+    "ssh_keys/homelab/private" = {
+      sopsFile = ../../secrets/nixspo.yaml;
+      owner = config.users.users.xsnilzx.name;
+      path = "/home/xsnilzx/.ssh/homelab";
+      mode = "0600";
+    };
+
+    "ssh_keys/huggingface/private" = {
+      sopsFile = ../../secrets/nixspo.yaml;
+      owner = config.users.users.xsnilzx.name;
+      path = "/home/xsnilzx/.ssh/huggingface";
+      mode = "0600";
+    };
+
+    "ssh_keys/swp/private" = {
+      sopsFile = ../../secrets/nixspo.yaml;
+      owner = config.users.users.xsnilzx.name;
+      path = "/home/xsnilzx/.ssh/swp";
       mode = "0600";
     };
     
