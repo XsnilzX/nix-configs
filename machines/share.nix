@@ -47,6 +47,12 @@
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  # sudo-rs
+  security.sudo-rs = {
+    enable = true;
+    wheelNeedsPassword = true;
+  };
+
   #nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   # Steam
