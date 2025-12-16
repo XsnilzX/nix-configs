@@ -9,5 +9,6 @@
     ./git.nix
     ./media.nix
     ./terminal.nix
+    ./writing.nix
   ];
 }
