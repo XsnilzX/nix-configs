@@ -44,6 +44,7 @@ in {
       alejandra
       nixd
       age
+      sops
 
       # Coding
       uv
@@ -53,6 +54,7 @@ in {
     ++ lib.optionals (machine == "nixspo") [
       brightnessctl
       weatherWidget
+      xarchiver
     ]
     ++ lib.optionals (machine == "nixhael") [
       # Optional

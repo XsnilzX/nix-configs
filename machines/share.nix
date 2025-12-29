@@ -16,6 +16,7 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "de_DE.UTF-8";
+  i18n.supportedLocales = ["all"];
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
