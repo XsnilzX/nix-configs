@@ -13,7 +13,7 @@
       "$terminal" = "ghostty";
       "$fileManager" = "thunar";
       "$menu" = "anyrun";
-      "$browser" = "zen-browser";
+      "$browser" = "helium";
       "$mail" = "thunderbird";
       "$code" = "vscodium --ozone-platform=wayland";
 

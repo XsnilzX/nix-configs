@@ -58,6 +58,7 @@ in {
       pavucontrol
       networkmanagerapplet
       blueman
+      hyprpaper
     ]
     ++ lib.optionals (machine == "nixhael") [
       # Optional
