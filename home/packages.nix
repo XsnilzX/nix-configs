@@ -55,6 +55,9 @@ in {
       brightnessctl
       weatherWidget
       xarchiver
+      pavucontrol
+      networkmanagerapplet
+      blueman
     ]
     ++ lib.optionals (machine == "nixhael") [
       # Optional

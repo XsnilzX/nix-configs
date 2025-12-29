@@ -10,7 +10,7 @@
       * {
           border: none;
           border-radius: 0px;
-          font-family: "JetBrainsMono Nerd Font", monospace;
+          font-family: "JetBrains Mono", "Symbols Nerd Font Mono", "Symbols Nerd Font", monospace;
           font-size: 12px;
           color: #cdd6f4;
       }
@@ -104,7 +104,7 @@
       }
 
       #custom-exit {
-          font-family: "Font Awesome 6 Free";
+          font-family: "Font Awesome 6 Free", "Symbols Nerd Font Mono";
           font-size: 12px;
           color: #f53c3c;
       }

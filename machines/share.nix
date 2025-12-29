@@ -42,9 +42,16 @@
     lmstudio
   ];
 
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-  ];
+  fonts = {
+    fontconfig.enable = true;
+    packages = with pkgs; [
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.symbols-only
+      font-awesome
+    ];
+  };
+
+  services.power-profiles-daemon.enable = true;
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
