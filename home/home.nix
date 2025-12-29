@@ -28,7 +28,7 @@
   };
 
   home.packages = [
-    inputs.helium.packages.${pkgs.system}.default
+    inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   programs.firefox = {

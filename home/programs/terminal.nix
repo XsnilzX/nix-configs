@@ -14,6 +14,7 @@
         nixupdate = "sudo nix flake update";
         code = "codium --ozone-platform=wayland";
       };
+      bashrcExtra = "fastfetch";
     };
     ghostty = {
       enable = true;
