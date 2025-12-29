@@ -12,6 +12,7 @@
         ls = "eza -la --color=always --icons=always --hyperlink";
         nixrebuild = "sudo nixos-rebuild switch --flake ~/nix-configs#nixhael";
         nixupdate = "sudo nix flake update";
+        code = "codium --ozone-platform=wayland";
       };
     };
     ghostty = {
@@ -23,5 +24,14 @@
         background-opacity = 0.6;
       };
     };
+    fzf = {
+      enable = true;
+      enableBashIntegration = true;
+    };
+    zoxide = {
+      enable = true;
+      enableBashIntegration = true;
+    };
+    uv.enable = true;
   };
 }

@@ -1,4 +1,8 @@
 {
+  config,
+  pkgs,
+  ...
+}: {
   programs.waybar = {
     enable = true;
     style = ''
@@ -147,7 +151,7 @@
           "format" = "{percent}%";
         };
         "custom/weather" = {
-          "exec" = "uv run --directory=/home/xsnilzx/Git/weather-widget main.py";
+          "exec" = "weather-widget";
           "return-type" = "json";
           "interval" = 120; # alle 2 Minuten aktualisieren
           "format" = "{}";
@@ -183,7 +187,7 @@
         };
         "custom/exit" = {
           "format" = "⏻";
-          "on-click" = "wlogout";
+          "on-click" = "wleave";
           "tooltip" = false;
         };
         "power-profiles-daemon" = {

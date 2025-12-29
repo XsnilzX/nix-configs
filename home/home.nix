@@ -19,6 +19,9 @@
     ++ lib.optionals (machine == "nixspo") [./hyprland ./niri ./nixspo]
     ++ lib.optionals (machine == "nixhael") [./nixhael];
 
+  # Gemeinsame Variablen
+  _module.args.weatherWidgetPath = "${config.home.homeDirectory}/Git/weather-widget";
+
   programs.zen-browser = {
     enable = true;
     languagePacks = ["de" "en-US"];

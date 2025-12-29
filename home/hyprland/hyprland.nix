@@ -27,6 +27,7 @@
         "systemctl --user start hyprpolkitagent"
         "swaync"
         "udiskie"
+        "seafile-applet"
       ];
     };
     extraConfig = ''
