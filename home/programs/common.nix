@@ -23,6 +23,7 @@
     # nix ide
     alejandra
     nixd
+    age
   ];
 
   programs = {

@@ -1,8 +1,10 @@
-{ config, lib, ... }:
-let
-  sshPath = "${config.home.homeDirectory}/.ssh";
-in
 {
+  config,
+  lib,
+  ...
+}: let
+  sshPath = "${config.home.homeDirectory}/.ssh";
+in {
   programs.ssh = {
     enable = true;
     matchBlocks = {

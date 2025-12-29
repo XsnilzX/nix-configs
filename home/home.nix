@@ -17,7 +17,7 @@
     ]
     ++ lib.optionals (machine == "nixspo") [./hyprland ./niri ./nixspo]
     ++ lib.optionals (machine == "nixhael") [./nixhael];
-  
+
   programs.zen-browser = {
     enable = true;
     languagePacks = ["de" "en-US"];

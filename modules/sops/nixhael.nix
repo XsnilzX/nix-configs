@@ -1,15 +1,13 @@
-{ config, ... }:
+{config, ...}: {
+  imports = [./default.nix];
 
-{
-  imports = [ ./default.nix ];
-  
   sops.secrets = {
     # User password
     "user_password_hash" = {
       sopsFile = ../../secrets/nixhael.yaml;
       neededForUsers = true;
     };
-    
+
     # SSH Keys
     "ssh_keys/biggi/private" = {
       sopsFile = ../../secrets/nixhael.yaml;
@@ -17,7 +15,7 @@
       path = "/home/xsnilzx/.ssh/biggi";
       mode = "0600";
     };
-    
+
     "ssh_keys/github/private" = {
       sopsFile = ../../secrets/nixhael.yaml;
       owner = config.users.users.xsnilzx.name;
@@ -52,14 +50,14 @@
       path = "/home/xsnilzx/.ssh/swp_key";
       mode = "0600";
     };
-    
+
     # Common tokens
     # "github_token" = {
     #   sopsFile = ../../secrets/common.yaml;
     #   owner = config.users.users.xsnilzx.name;
     # };
   };
-  
+
   # User mit hashedPassword
   users.users.xsnilzx = {
     hashedPasswordFile = config.sops.secrets.user_password_hash.path;

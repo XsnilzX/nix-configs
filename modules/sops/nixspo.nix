@@ -1,21 +1,19 @@
-{ config, ... }:
+{config, ...}: {
+  imports = [./default.nix];
 
-{
-  imports = [ ./default.nix ];
-  
   sops.secrets = {
     "user_password_hash" = {
       sopsFile = ../../secrets/nixspo.yaml;
       neededForUsers = true;
     };
-    
+
     "ssh_keys/biggi/private" = {
       sopsFile = ../../secrets/nixspo.yaml;
       owner = config.users.users.xsnilzx.name;
       path = "/home/xsnilzx/.ssh/biggi";
       mode = "0600";
     };
-    
+
     "ssh_keys/github_key/private" = {
       sopsFile = ../../secrets/nixspo.yaml;
       owner = config.users.users.xsnilzx.name;
@@ -64,13 +62,13 @@
       path = "/home/xsnilzx/.ssh/swp";
       mode = "0600";
     };
-    
+
     # "github_token" = {
     #   sopsFile = ../../secrets/common.yaml;
     #   owner = config.users.users.xsnilzx.name;
     # };
   };
-  
+
   users.users.xsnilzx = {
     hashedPasswordFile = config.sops.secrets.user_password_hash.path;
   };

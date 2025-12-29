@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ./../share.nix
     ./../../modules/hyprland.nix
+    ./../../modules/sops/nixspo.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -18,10 +19,11 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  networking.hostName = "nixel";
+  networking.hostName = "nixspo";
   networking.networkmanager.enable = true;
 
   services = {
     udisks2.enable = true;
+    openssh.enable = true;
   };
 }

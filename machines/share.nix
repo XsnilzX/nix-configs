@@ -27,7 +27,7 @@
 
   users.users.xsnilzx = {
     isNormalUser = true;
-    extraGroups = ["wheel"];
+    extraGroups = ["wheel" "networkmanager"];
     packages = with pkgs; [
       tree
     ];
