@@ -14,6 +14,7 @@
     [
       inputs.zen-browser.homeModules.twilight
       ./programs
+      ./packages.nix
     ]
     ++ lib.optionals (machine == "nixspo") [./hyprland ./niri ./nixspo]
     ++ lib.optionals (machine == "nixhael") [./nixhael];

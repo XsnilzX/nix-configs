@@ -7,7 +7,7 @@
     ./anyrun.nix
     ./hyprland.nix
     ./swaync.nix
-    # ./waybar.nix
+    ./waybar.nix
     ./wleave.nix
   ];
 }
