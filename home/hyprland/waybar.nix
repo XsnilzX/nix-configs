@@ -1,11 +1,12 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   programs.waybar = {
     enable = true;
-    style = ''
+    style = lib.mkForce ''
       /* Schrift & Grundfarbe */
       * {
           border: none;
@@ -109,7 +110,7 @@
           color: #f53c3c;
       }
     '';
-    settings = {
+    settings = lib.mkForce {
       mainBar = {
         layer = "top";
         position = "top";

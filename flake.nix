@@ -14,6 +14,7 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix.url = "github:danth/stylix";
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -26,6 +27,7 @@
     nixpkgs,
     home-manager,
     sops-nix,
+    stylix,
     ...
   }: {
     nixosConfigurations = {
@@ -38,6 +40,7 @@
         modules = [
           ./machines/nixhael/configuration.nix
           sops-nix.nixosModules.sops
+          stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
@@ -64,6 +67,7 @@
         modules = [
           ./machines/nixspo/configuration.nix
           sops-nix.nixosModules.sops
+          stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;

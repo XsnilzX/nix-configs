@@ -7,6 +7,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./style.nix
     ./../share.nix
     ./../../modules/hyprland.nix
     ./../../modules/sops/nixspo.nix

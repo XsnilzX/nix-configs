@@ -1,10 +1,10 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   # Editor Setup
 
   programs.helix = {
     enable = true;
     settings = {
-      theme = "dracula_at_night";
+      theme = lib.mkForce("dracula_at_night");
       editor = {
         scrolloff = 8;
         scroll-lines = 4;

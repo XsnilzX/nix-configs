@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   programs.hyprlock = {
@@ -13,7 +14,7 @@
       };
 
       # Hintergrund
-      background = [
+      background = lib.mkForce [
         {
           path = "${config.home.homeDirectory}/Bilder/Wallpaper/explosion-color.jpg";
           blur_size = 5;
@@ -27,7 +28,7 @@
       ];
 
       # Eingabefeld
-      input-field = [
+      input-field = lib.mkForce [
         {
           size = "250, 50";
           outline_thickness = 5;
