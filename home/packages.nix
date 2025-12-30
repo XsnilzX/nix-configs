@@ -35,6 +35,7 @@ in {
       htop
       fastfetch
       seafile-client
+      ncdu
 
       # gaming tools
       protonplus
