@@ -51,5 +51,7 @@
         popups = 10;
       };
     };
+    targets.firefox.profileNames = [ "default" ];
+    targets.zen-browser.profileNames = [ "default" ];
   };
 }
