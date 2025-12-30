@@ -2,6 +2,7 @@
   description = "nixes-test";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     helium = {
       url = "github:AlvaroParker/helium-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -25,6 +26,7 @@
   outputs = inputs @ {
     self,
     nixpkgs,
+    nix-vscode-extensions,
     home-manager,
     sops-nix,
     stylix,
@@ -44,6 +46,7 @@
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
+            nixpkgs.overlays = [ nix-vscode-extensions.overlays.default ];
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
@@ -71,6 +74,7 @@
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
+            nixpkgs.overlays = [ nix-vscode-extensions.overlays.default ];
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;

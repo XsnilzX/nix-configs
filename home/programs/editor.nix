@@ -49,6 +49,29 @@
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
+    profiles.default = {
+      extensions = with pkgs.vscode-marketplace; [
+        pkief.material-icon-theme
+        
+        # Andere Extensions vom Marktplatz:
+        # editorconfig.editorconfig
+        esbenp.prettier-vscode
+        redhat.java
+        llvm-vs-code-extensions.vscode-clangd
+        vmware.vscode-spring-boot
+        rust-lang.rust-analyzer
+        ms-python.python
+        continue.continue
+        tomoki1207.pdf
+        jnoortheen.nix-ide
+      ];
+
+      # Extensions aktivieren
+      userSettings = {
+        "workbench.iconTheme" = "material-icon-theme";
+        "editor.formatOnSave" = true;
+      };
+    };
   };
 
   programs.zed-editor = {
