@@ -19,6 +19,7 @@
 in {
   home.sessionVariables = {
     UV_PYTHON_PREFERENCE = "only-system";
+    NIXOS_OZONE_WL = "1";
   };
 
   home.packages = with pkgs;
