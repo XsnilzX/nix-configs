@@ -46,7 +46,7 @@
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
-            nixpkgs.overlays = [ nix-vscode-extensions.overlays.default ];
+            nixpkgs.overlays = [nix-vscode-extensions.overlays.default];
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
@@ -74,7 +74,7 @@
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
-            nixpkgs.overlays = [ nix-vscode-extensions.overlays.default ];
+            nixpkgs.overlays = [nix-vscode-extensions.overlays.default];
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;

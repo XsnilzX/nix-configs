@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   # STYLIX KONFIGURATION (Tokyo Night Dark)
   stylix = {
     enable = true;
@@ -43,7 +41,7 @@
         package = pkgs.dejavu_fonts;
         name = "DejaVu Serif";
       };
-      
+
       sizes = {
         applications = 12;
         terminal = 14;

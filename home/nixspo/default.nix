@@ -7,7 +7,7 @@
     ./ssh-nixspo.nix
   ];
   stylix = {
-    targets.firefox.profileNames = [ "default" ];
-    targets.zen-browser.profileNames = [ "default" ];
+    targets.firefox.profileNames = ["default"];
+    targets.zen-browser.profileNames = ["default"];
   };
 }

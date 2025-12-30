@@ -1,10 +1,14 @@
-{pkgs, lib, ...}: {
+{
+  pkgs,
+  lib,
+  ...
+}: {
   # Editor Setup
 
   programs.helix = {
     enable = true;
     settings = {
-      theme = lib.mkForce("dracula_at_night");
+      theme = lib.mkForce "dracula_at_night";
       editor = {
         scrolloff = 8;
         scroll-lines = 4;
@@ -49,27 +53,31 @@
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium;
+    mutableExtensionsDir = false;
     profiles.default = {
-      extensions = with pkgs.vscode-marketplace; [
-        pkief.material-icon-theme
-        
-        # Andere Extensions vom Marktplatz:
-        # editorconfig.editorconfig
-        esbenp.prettier-vscode
-        redhat.java
-        llvm-vs-code-extensions.vscode-clangd
-        vmware.vscode-spring-boot
-        rust-lang.rust-analyzer
-        ms-python.python
-        continue.continue
-        tomoki1207.pdf
-        jnoortheen.nix-ide
-      ];
+      extensions = with pkgs.vscode-extensions;
+        [
+          pkief.material-icon-theme
+          # editorconfig.editorconfig
+          esbenp.prettier-vscode
+          redhat.java
+          llvm-vs-code-extensions.vscode-clangd
+          rust-lang.rust-analyzer
+          ms-python.python
+          continue.continue
+          tomoki1207.pdf
+          jnoortheen.nix-ide
+        ]
+        ++ (with pkgs.vscode-marketplace; [
+          # Extensions, die nicht in den offiziellen pkgs sind, kommen hier rein:
+          vmware.vscode-spring-boot
+        ]);
 
       # Extensions aktivieren
       userSettings = {
         "workbench.iconTheme" = "material-icon-theme";
         "editor.formatOnSave" = true;
+        "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
       };
     };
   };

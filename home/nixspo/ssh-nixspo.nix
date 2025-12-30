@@ -7,7 +7,7 @@
 in {
   programs.ssh = {
     enable = true;
-    enableDefaultConfig = false; 
+    enableDefaultConfig = false;
     matchBlocks = {
       "git-uni" = {
         hostname = "gitlab.uni-hannover.de";
