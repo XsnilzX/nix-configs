@@ -65,4 +65,13 @@ in {
     ++ lib.optionals (machine == "nixhael") [
       # Optional
     ];
+
+  xdg.desktopEntries.discord = {
+    name = "Discord";
+    genericName = "All-in-one voice and text chat";
+    exec = "discord --ozone-platform=wayland";
+    icon = "discord";
+    type = "Application";
+    categories = ["Network" "InstantMessaging"];
+  };
 }
