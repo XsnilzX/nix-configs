@@ -28,7 +28,7 @@
 
   users.users.xsnilzx = {
     isNormalUser = true;
-    extraGroups = ["wheel" "networkmanager"];
+    extraGroups = ["wheel" "networkmanager" "docker"];
     packages = with pkgs; [
       tree
     ];
@@ -53,7 +53,17 @@
 
   services.power-profiles-daemon.enable = true;
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings = {
+    experimental-features = ["nix-command" "flakes"];
+    trusted-substituters = [
+      "https://cache.flox.dev"
+    ];
+    trusted-public-keys = [
+      "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXtjlu/UaAZnotSH+zGeSHs="
+    ];
+  };
+
+  virtualisation.docker.enable = true;
 
   # sudo-rs
   security.sudo-rs = {

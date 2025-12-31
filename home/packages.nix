@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  inputs,
   lib,
   machine,
   weatherWidgetPath,
@@ -52,6 +53,12 @@ in {
       uv
       stdenv.cc.cc.lib
       python313
+
+      # Nix tools
+      inputs.flox.packages.${pkgs.system}.default
+      devbox
+      direnv
+      nix-direnv
     ]
     ++ lib.optionals (machine == "nixspo") [
       brightnessctl
@@ -73,5 +80,10 @@ in {
     icon = "discord";
     type = "Application";
     categories = ["Network" "InstantMessaging"];
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
   };
 }
