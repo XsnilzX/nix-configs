@@ -28,6 +28,7 @@
 
   users.users.xsnilzx = {
     isNormalUser = true;
+    shell = pkgs.zsh;
     extraGroups = ["wheel" "networkmanager" "docker"];
     packages = with pkgs; [
       tree
@@ -72,6 +73,8 @@
   };
 
   #nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+
+  programs.zsh.enable = true;
 
   # Steam
   programs.steam = {

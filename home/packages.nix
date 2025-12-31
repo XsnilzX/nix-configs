@@ -38,6 +38,8 @@ in {
       fastfetch
       seafile-client
       ncdu
+      fd
+      ripgrep
 
       # gaming tools
       protonplus
