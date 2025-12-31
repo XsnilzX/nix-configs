@@ -22,8 +22,8 @@
 
     # Cursor Theme (Passt gut zu Tokyo Night)
     cursor = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Ice";
+      package = pkgs.catppuccin-cursors.frappeDark;
+      name = "capitaine-cursors";
       size = 24;
     };
 

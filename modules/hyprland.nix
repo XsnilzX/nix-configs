@@ -14,5 +14,7 @@
   services = {
     blueman.enable = true;
     displayManager.ly.enable = true;
+    gvfs.enable = true;
+    tumbler.enable = true;
   };
 }
