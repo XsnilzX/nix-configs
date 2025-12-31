@@ -41,6 +41,7 @@
     kdePackages.partitionmanager
     prismlauncher
     lmstudio
+    nh
   ];
 
   fonts = {
