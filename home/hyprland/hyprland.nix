@@ -20,6 +20,7 @@
       # am anfang starten
       exec-once = [
         "hypridle"
+        "hyprpaper"
         "nm-applet --indicator"
         "blueman-applet"
         "waybar"
@@ -348,10 +349,18 @@
 
   home.packages = with pkgs; [
     waybar
-    hyprpaper
     hyprpicker
-    hyprshot
   ];
+
+  home.file."Bilder/Wallpaper/wallpaper.png".source = ./../../machines/nixspo/wallpaper.png;
+
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = ["${config.home.homeDirectory}/Bilder/Wallpaper/wallpaper.png"];
+      wallpaper = [", ${config.home.homeDirectory}/Bilder/Wallpaper/wallpaper.png"];
+    };
+  };
 
   programs.hyprshot = {
     enable = true;
