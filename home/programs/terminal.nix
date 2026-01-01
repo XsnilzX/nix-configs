@@ -104,10 +104,11 @@
         g = "git";
         ga = "git add";
         gaa = "git add --all";
-        gs = "git status";
+        gst = "git status";
         gc = "git commit -m";
         gp = "git push";
         gl = "git pull";
+        gll = "git pull -f";
         gco = "git checkout";
 
         # System
