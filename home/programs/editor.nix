@@ -60,13 +60,15 @@
           pkief.material-icon-theme
           # editorconfig.editorconfig
           esbenp.prettier-vscode
-          redhat.java
+          #redhat.java
           llvm-vs-code-extensions.vscode-clangd
           rust-lang.rust-analyzer
           ms-python.python
           continue.continue
           tomoki1207.pdf
           jnoortheen.nix-ide
+          oracle.oracle-java
+          vscjava.vscode-gradle
         ]
         ++ (with pkgs.vscode-marketplace; [
           # Extensions, die nicht in den offiziellen pkgs sind, kommen hier rein:
