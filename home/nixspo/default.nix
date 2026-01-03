@@ -6,22 +6,34 @@
   imports = [
     ./ssh-nixspo.nix
   ];
+
+  home.sessionVariables = {
+    SAL_USE_VCLPLUGIN = "gtk4";
+
+    XCURSOR_SIZE = "${toString config.stylix.cursor.size}";
+    XCURSOR_THEME = "${config.stylix.cursor.name}";
+  };
+
   stylix = {
-    targets.firefox.profileNames = ["default"];
-    targets.zen-browser.profileNames = ["default"];
+    iconTheme = {
+      enable = true;
+      package = pkgs.papirus-icon-theme;
+      dark = "Papirus-Dark";
+      light = "Papirus-Light";
+    };
+
+    targets = {
+      gtk.enable = true;
+      firefox.profileNames = ["default"];
+      zen-browser.profileNames = ["default"];
+    };
   };
 
   gtk = {
     enable = true;
-    iconTheme = {
-      package = pkgs.papirus-icon-theme;
-      name = "Papirus-Dark";
-    };
-
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
     };
-
     gtk4.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
     };

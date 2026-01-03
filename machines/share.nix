@@ -56,6 +56,7 @@
   services.power-profiles-daemon.enable = true;
 
   nix.settings = {
+    download-buffer-size = 134217728; # 128 MiB
     experimental-features = ["nix-command" "flakes"];
     trusted-substituters = [
       "https://cache.flox.dev"

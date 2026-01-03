@@ -6,6 +6,6 @@
   home.packages = with pkgs; [
     zotero
 
-    libreoffice-qt
+    libreoffice-fresh
   ];
 }
