@@ -42,6 +42,7 @@
     prismlauncher
     lmstudio
     nh
+    exfatprogs
   ];
 
   fonts = {
