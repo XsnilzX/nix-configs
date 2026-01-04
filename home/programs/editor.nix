@@ -69,6 +69,7 @@
           jnoortheen.nix-ide
           oracle.oracle-java
           vscjava.vscode-gradle
+          signageos.signageos-vscode-sops
         ]
         ++ (with pkgs.vscode-marketplace; [
           # Extensions, die nicht in den offiziellen pkgs sind, kommen hier rein:
