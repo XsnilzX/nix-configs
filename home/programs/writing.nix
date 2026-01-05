@@ -7,5 +7,8 @@
     zotero
 
     libreoffice-fresh
+    hunspell
+    hunspellDicts.de_DE
+    hunspellDicts.en_US
   ];
 }

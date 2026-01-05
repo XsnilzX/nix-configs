@@ -110,6 +110,7 @@
         gl = "git pull";
         gll = "git pull -f";
         gco = "git checkout";
+        gsw = "git switch";
 
         # System
         rebuild = "sudo nixos-rebuild switch --flake .";

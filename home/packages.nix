@@ -40,6 +40,7 @@ in {
       ncdu
       fd
       ripgrep
+      bat
 
       # gaming tools
       protonplus
