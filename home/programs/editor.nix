@@ -3,7 +3,20 @@
   lib,
   ...
 }: {
-  # Editor Setup
+  home.packages = with pkgs; [
+    # Für C/C++
+    clang-tools
+    gcc
+    # Rust (cargo ist meistens via rustup oder rustc da, aber rust-analyzer wird gebraucht)
+    rust-analyzer
+    # Go
+    gopls
+    gotools # für gofumpt/goimports
+    # Typst
+    tinymist
+    # Java
+    jdt-language-server
+  ];
 
   programs.helix = {
     enable = true;
@@ -33,20 +46,63 @@
     languages = {
       language = [
         {
+          name = "c";
+          auto-format = true;
+          language-servers = ["clangd"];
+        }
+        {
+          name = "cpp";
+          auto-format = true;
+          language-servers = ["clangd"];
+        }
+        {
           name = "rust";
-          auto-fortmat = true;
+          auto-format = true;
+        }
+        {
+          name = "typst";
+          language-servers = ["tinymist"];
+        }
+        {
+          name = "go";
+          language-servers = ["gopls"];
+        }
+        {
+          name = "java";
+          language-servers = ["jdtls"];
         }
       ];
-      language-server.rust-analyzer = with pkgs.rust-analyzer; {
-        command = "rust-analyzer";
+      language-server = {
+        clangd = {
+          command = "clangd";
+          # Nützliche Argumente für clangd
+          args = [
+            "--background-index"
+            "--clang-tidy"
+            "--header-insertion=iwyu"
+            "--completion-style=detailed"
+            "--function-arg-placeholders"
+            "--fallback-style=llvm"
+          ];
+        };
+        gopls = {
+          command = "gopls";
+          args = ["-logfile=/tmp/gopls.log" "serve"];
+          config = {
+            "ui.diagnostic.staticcheck" = false;
+            gofumpt = true;
+          };
+        };
+        jdtls = {
+          command = "jdtls";
+        };
+        rust-analyzer = {
+          command = "rust-analyzer";
+        };
+        tinymist = {
+          command = "tinymist";
+        };
       };
-      #language = [{
-      #	name = "typst";
-      #	language-server = "tinymist";
-      #}];
-      #language-server.tinymist = with pkgs.tinymist; {
-      #	command = "tinymist";
-      #};
     };
   };
 
