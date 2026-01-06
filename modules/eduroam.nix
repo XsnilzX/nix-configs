@@ -2,7 +2,12 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  tTeleSecPem = builtins.fetchurl {
+    url = "https://corporate-pki.telekom.de/crt/GlobalRoot_Class_2.crt";
+    sha256 = "0li50lbin11y2h5vr625076wm3laakhpswsqpakyn42qimwgbqli";
+  };
+in {
   sops.defaultSopsFile = ./../secrets/nixspo.yaml;
 
   sops.secrets."eduroam-env" = {
@@ -12,17 +17,10 @@
     mode = "0400";
   };
 
-  sops.secrets."eduroam-ca.crt" = {
-    owner = "root";
-    group = "root";
-    mode = "0444";
-    path = "/etc/ssl/certs/eduroam-ca.crt";
-  };
+  environment.etc."ssl/certs/GlobalRoot_Class_2.crt".source = tTeleSecPem;
 
-  # NetworkManager einschalten
   networking.networkmanager.enable = true;
 
-  # eduroam-Profil; Pfad aus sops nehmen
   networking.networkmanager.ensureProfiles = {
     environmentFiles = [config.sops.secrets."eduroam-env".path];
 
@@ -42,15 +40,13 @@
         key-mgmt = "wpa-eap";
       };
 
-      # Häng von deiner Uni ab – hier ein typisches PEAP/MSCHAPv2-Setup
       "802-1x" = {
-        eap = "peap"; # oder [ "ttls" ]
+        eap = "peap";
         identity = "$EDUROAM_ID";
-        anonymous-identity = "$EDUROAM_ANON_ID"; # optional
+        anonymous-identity = "$EDUROAM_ANON_ID";
         password = "$EDUROAM_PW";
-        phase2-auth = "mschapv2"; # oder "pap" bei TTLS
-        # evtl. zusätzlich:
-        ca-cert = config.sops.secrets."eduroam-ca.crt".path;
+        phase2-auth = "mschapv2";
+        ca-cert = "/etc/ssl/certs/GlobalRoot_Class_2.crt";
       };
 
       ipv4.method = "auto";
