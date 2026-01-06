@@ -11,6 +11,7 @@
     ./../share.nix
     ./../../modules/hyprland.nix
     ./../../modules/sops/nixspo.nix
+    ./../../modules/eduroam.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
