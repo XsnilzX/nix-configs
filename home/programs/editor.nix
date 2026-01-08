@@ -123,7 +123,8 @@
           continue.continue
           tomoki1207.pdf
           jnoortheen.nix-ide
-          oracle.oracle-java
+          # oracle.oracle-java
+          redhat.java
           vscjava.vscode-gradle
           signageos.signageos-vscode-sops
         ]
