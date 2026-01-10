@@ -47,7 +47,7 @@
     "ssh_keys/swp_key/private" = {
       sopsFile = ../../secrets/nixhael.yaml;
       owner = config.users.users.xsnilzx.name;
-      path = "/home/xsnilzx/.ssh/swp_key";
+      path = "/home/xsnilzx/.ssh/swp";
       mode = "0600";
     };
 
