@@ -16,7 +16,7 @@
       ./programs
       ./packages.nix
     ]
-    ++ lib.optionals (machine == "nixspo") [./hyprland ./niri ./nixspo]
+    ++ lib.optionals (machine == "nixspo") [./hyprland ./nixspo] # Optional enable niri ./niri
     ++ lib.optionals (machine == "nixhael") [./nixhael];
 
   # Gemeinsame Variablen
