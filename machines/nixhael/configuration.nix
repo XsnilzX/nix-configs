@@ -18,7 +18,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  networking.hostName = "nixes-test"; # Define your hostname.
+  networking.hostName = "nixhael"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   fileSystems."/mnt/games" = {
