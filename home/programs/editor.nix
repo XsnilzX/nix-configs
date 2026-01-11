@@ -126,6 +126,7 @@
           # oracle.oracle-java
           redhat.java
           vscjava.vscode-gradle
+          vscjava.vscode-maven
           signageos.signageos-vscode-sops
         ]
         ++ (with pkgs.vscode-marketplace; [
