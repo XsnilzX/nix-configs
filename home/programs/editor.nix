@@ -197,6 +197,7 @@
         userSettings = {
           "workbench.iconTheme" = "material-icon-theme";
           "editor.formatOnSave" = false;
+          "redhat.telemetry.enabled" = false;
         };
       };
     };
