@@ -110,35 +110,94 @@
     enable = true;
     package = pkgs.vscodium;
     mutableExtensionsDir = false;
-    profiles.default = {
-      extensions = with pkgs.vscode-extensions;
-        [
-          pkief.material-icon-theme
-          # editorconfig.editorconfig
-          esbenp.prettier-vscode
-          #redhat.java
-          llvm-vs-code-extensions.vscode-clangd
-          rust-lang.rust-analyzer
-          ms-python.python
-          continue.continue
-          tomoki1207.pdf
-          jnoortheen.nix-ide
-          # oracle.oracle-java
-          redhat.java
-          vscjava.vscode-gradle
-          vscjava.vscode-maven
-          signageos.signageos-vscode-sops
-        ]
-        ++ (with pkgs.vscode-marketplace; [
-          # Extensions, die nicht in den offiziellen pkgs sind, kommen hier rein:
-          vmware.vscode-spring-boot
-        ]);
+    profiles = {
+      default = {
+        extensions = with pkgs.vscode-extensions;
+          [
+            pkief.material-icon-theme
+            # editorconfig.editorconfig
+            esbenp.prettier-vscode
+            # llvm-vs-code-extensions.vscode-clangd
+            # rust-lang.rust-analyzer
+            # ms-python.python
+            continue.continue
+            tomoki1207.pdf
+            jnoortheen.nix-ide
+            #redhat.java
+          ]
+          ++ (with pkgs.vscode-marketplace; [
+            # Extensions, die nicht in den offiziellen pkgs sind, kommen hier rein:
+          ]);
 
-      # Extensions aktivieren
-      userSettings = {
-        "workbench.iconTheme" = "material-icon-theme";
-        "editor.formatOnSave" = true;
-        "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
+        # Extensions aktivieren
+        userSettings = {
+          "workbench.iconTheme" = "material-icon-theme";
+          "editor.formatOnSave" = true;
+          "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
+        };
+      };
+      "Python" = {
+        extensions = with pkgs.vscode-extensions;
+          [
+            pkief.material-icon-theme
+            esbenp.prettier-vscode
+            ms-python.python
+            continue.continue
+            tomoki1207.pdf
+          ]
+          ++ (with pkgs.vscode-marketplace; [
+            # Extensions, die nicht in den offiziellen pkgs sind, kommen hier rein:
+            the0807.uv-toolkit
+          ]);
+        userSettings = {
+          "workbench.iconTheme" = "material-icon-theme";
+          "editor.formatOnSave" = true;
+        };
+      };
+      "Nix-OS" = {
+        extensions = with pkgs.vscode-extensions;
+          [
+            pkief.material-icon-theme
+            # editorconfig.editorconfig
+            esbenp.prettier-vscode
+            continue.continue
+            tomoki1207.pdf
+            jnoortheen.nix-ide
+            signageos.signageos-vscode-sops
+          ]
+          ++ (with pkgs.vscode-marketplace; [
+            # Extensions, die nicht in den offiziellen pkgs sind, kommen hier rein:
+          ]);
+
+        # Extensions aktivieren
+        userSettings = {
+          "workbench.iconTheme" = "material-icon-theme";
+          "editor.formatOnSave" = true;
+          "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
+        };
+      };
+
+      "iits-1" = {
+        extensions = with pkgs.vscode-extensions;
+          [
+            pkief.material-icon-theme
+            esbenp.prettier-vscode
+            continue.continue
+            tomoki1207.pdf
+            redhat.java
+            vscjava.vscode-gradle
+            vscjava.vscode-maven
+          ]
+          ++ (with pkgs.vscode-marketplace; [
+            # Extensions, die nicht in den offiziellen pkgs sind, kommen hier rein:
+            vmware.vscode-spring-boot
+          ]);
+
+        # Extensions aktivieren
+        userSettings = {
+          "workbench.iconTheme" = "material-icon-theme";
+          "editor.formatOnSave" = false;
+        };
       };
     };
   };
