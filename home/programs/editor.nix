@@ -134,6 +134,7 @@
           "workbench.iconTheme" = "material-icon-theme";
           "editor.formatOnSave" = true;
           "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
+          "git.autofetch" = true;
         };
       };
       "Python" = {
@@ -152,6 +153,7 @@
         userSettings = {
           "workbench.iconTheme" = "material-icon-theme";
           "editor.formatOnSave" = true;
+          "git.autofetch" = true;
         };
       };
       "Nix-OS" = {
@@ -174,6 +176,7 @@
           "workbench.iconTheme" = "material-icon-theme";
           "editor.formatOnSave" = true;
           "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
+          "git.autofetch" = true;
         };
       };
 
@@ -198,6 +201,7 @@
           "workbench.iconTheme" = "material-icon-theme";
           "editor.formatOnSave" = false;
           "redhat.telemetry.enabled" = false;
+          "git.autofetch" = true;
         };
       };
     };
