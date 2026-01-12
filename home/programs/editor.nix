@@ -135,6 +135,7 @@
           "editor.formatOnSave" = true;
           "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
           "git.autofetch" = true;
+          "window.newWindowProfile" = "Default";
         };
       };
       "Python" = {
@@ -209,6 +210,14 @@
 
   programs.zed-editor = {
     enable = true;
-    extensions = ["nix" "dracula" "typst"];
+    extensions = ["nix" "dracula" "typst" "java" "toml"];
+    userSettings = {
+      "auto_update" = false;
+      telemetry = {
+        diagnostic = false;
+        metrics = false;
+      };
+      "theme" = "Dracula";
+    };
   };
 }

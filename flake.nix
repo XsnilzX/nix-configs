@@ -1,5 +1,5 @@
 {
-  description = "nixes-test";
+  description = "My own Nix-OS Flake config.";
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
     nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
