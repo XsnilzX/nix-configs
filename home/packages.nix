@@ -74,6 +74,7 @@ in {
     ]
     ++ lib.optionals (machine == "nixhael") [
       # Optional
+      lunar-client
     ];
 
   xdg.desktopEntries.discord = {
