@@ -3,6 +3,7 @@
   lib,
   pkgs,
   inputs,
+  machine,
   ...
 }: {
   # do garbage collection weekly to keep disk usage low
