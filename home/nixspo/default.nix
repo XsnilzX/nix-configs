@@ -15,7 +15,7 @@
   };
 
   stylix = {
-    iconTheme = {
+    icons = {
       enable = true;
       package = pkgs.papirus-icon-theme;
       dark = "Papirus-Dark";
@@ -26,6 +26,7 @@
       gtk.enable = true;
       firefox.profileNames = ["default"];
       zen-browser.profileNames = ["default"];
+      zed.enable = false;
     };
   };
 
