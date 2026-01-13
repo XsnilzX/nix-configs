@@ -35,15 +35,22 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    kdePackages.partitionmanager
-    prismlauncher
-    lmstudio
-    nh
-    exfatprogs
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      wget
+      kdePackages.partitionmanager
+      prismlauncher
+      lmstudio
+      nh
+      exfatprogs
+    ]
+    ++ lib.optionals (machine == "nixspo") [
+      quickshell
+      qt6.qtimageformats
+      qt6.qtmultimedia
+      qt6.qt5compat
+    ];
 
   fonts = {
     fontconfig.enable = true;
