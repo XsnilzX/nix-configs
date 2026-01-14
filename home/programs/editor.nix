@@ -205,6 +205,26 @@
           "git.autofetch" = true;
         };
       };
+
+      "Quickshell" = {
+        extensions = with pkgs.vscode-extensions;
+          [
+            pkief.material-icon-theme
+            esbenp.prettier-vscode
+            continue.continue
+            tomoki1207.pdf
+          ]
+          ++ (with pkgs.vscode-marketplace; [
+            # Extensions, die nicht in den offiziellen pkgs sind, kommen hier rein:
+            theqtcompany.qt-qml
+            theqtcompany.qt-core
+          ]);
+        userSettings = {
+          "workbench.iconTheme" = "material-icon-theme";
+          "editor.formatOnSave" = true;
+          "git.autofetch" = true;
+        };
+      };
     };
   };
 
