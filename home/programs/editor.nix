@@ -223,6 +223,10 @@
           "workbench.iconTheme" = "material-icon-theme";
           "editor.formatOnSave" = true;
           "git.autofetch" = true;
+          "workbench.editorAssociations" = {
+            "{git,gitlens,chat-editing-snapshot-text-model,copilot,git-graph,git-graph-3}:/**/*.qrc" = "default";
+            "*.qrc" = "qt-core.qrcEditor";
+          };
         };
       };
     };
