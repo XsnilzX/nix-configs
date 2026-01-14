@@ -41,6 +41,7 @@ in {
       fd
       ripgrep
       bat
+      lmstudio
 
       # gaming tools
       protonplus
@@ -75,7 +76,7 @@ in {
     ++ lib.optionals (machine == "nixhael") [
       # Optional
       lunar-client
-      badlion-client
+      prismlauncher
     ];
 
   xdg.desktopEntries.discord = {
