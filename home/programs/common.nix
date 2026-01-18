@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  machine,
   ...
 }: {
   programs = {
@@ -14,7 +15,5 @@
     };
   };
 
-  services = {
-    udiskie.enable = true;
-  };
+  services.udiskie.enable = machine == "nixspo";
 }
