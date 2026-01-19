@@ -78,6 +78,7 @@ in {
       # Optional
       lunar-client
       prismlauncher
+      heroic
     ];
 
   xdg.desktopEntries.discord = {
