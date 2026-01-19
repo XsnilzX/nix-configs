@@ -42,6 +42,7 @@ in {
       ripgrep
       bat
       lmstudio
+      gimp
 
       # gaming tools
       protonplus
