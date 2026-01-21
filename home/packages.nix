@@ -44,8 +44,8 @@ in {
       lmstudio
       gimp
 
-      # gaming tools
-      protonplus
+      # Chatting
+      element-desktop
       discord
 
       # nix ide
@@ -81,6 +81,7 @@ in {
       heroic
       mangohud
       goverlay
+      protonplus
     ];
 
   xdg.desktopEntries.discord = {
