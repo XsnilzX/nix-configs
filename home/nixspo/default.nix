@@ -25,6 +25,7 @@
     targets = {
       gtk.enable = true;
       firefox.profileNames = ["default"];
+      vscode.enable = true;
       zen-browser.profileNames = ["default"];
       zed.enable = false;
     };
