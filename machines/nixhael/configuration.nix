@@ -16,6 +16,37 @@
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.kernelParams = [
+    "amd_pstate=active"
+  ];
+
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 10;
+    "kernel.sched_autogroup_enabled" = 1;
+  };
+
+  powerManagement.cpuFreqGovernor = "performance";
+
+  programs.gamemode.enable = true;
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+
+    extraPackages = with pkgs; [
+      mesa
+      vulkan-loader
+      vulkan-tools
+      vulkan-validation-layers
+    ];
+  };
+
+  environment.variables = {
+    RADV_PERFTEST = "aco";
+    AMD_VULKAN_ICD = "RADV";
+    MANGOHUD = "1";
+  };
+
   nixpkgs.config.allowUnfree = true;
 
   networking.hostName = "nixhael"; # Define your hostname.

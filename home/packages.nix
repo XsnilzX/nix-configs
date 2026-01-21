@@ -79,6 +79,8 @@ in {
       lunar-client
       prismlauncher
       heroic
+      mangohud
+      goverlay
     ];
 
   xdg.desktopEntries.discord = {

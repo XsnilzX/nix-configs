@@ -3,15 +3,9 @@
   lib,
   pkgs,
   inputs,
+  machine,
   ...
 }: {
-  # do garbage collection weekly to keep disk usage low
-  nix.gc = {
-    automatic = lib.mkDefault true;
-    dates = lib.mkDefault "weekly";
-    options = lib.mkDefault "--delete-older-than 7d";
-  };
-
   time.timeZone = "Europe/Berlin";
 
   # Select internationalisation properties.
@@ -35,13 +29,17 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    kdePackages.partitionmanager
-    nh
-    exfatprogs
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      vim
+      wget
+      kdePackages.partitionmanager
+      nh
+      exfatprogs
+    ]
+    ++ lib.optionals (machine == "nixhael") [
+      gamescope
+    ];
 
   fonts = {
     enableDefaultPackages = true;
@@ -57,15 +55,36 @@
 
   services.power-profiles-daemon.enable = true;
 
-  nix.settings = {
-    download-buffer-size = 134217728; # 128 MiB
-    experimental-features = ["nix-command" "flakes"];
-    trusted-substituters = [
-      "https://cache.flox.dev"
-    ];
-    trusted-public-keys = [
-      "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXtjlu/UaAZnotSH+zGeSHs="
-    ];
+  nix = {
+    settings = {
+      experimental-features = ["nix-command" "flakes"];
+
+      max-jobs = "auto";
+      cores = 0;
+
+      download-buffer-size = 268435456; # 256 MiB
+
+      keep-outputs = true;
+      keep-derivations = true;
+
+      auto-optimise-store = true;
+      sandbox = true;
+
+      warn-dirty = false;
+      builders-use-substitutes = true;
+
+      trusted-substituters = [
+        "https://cache.flox.dev"
+      ];
+      trusted-public-keys = [
+        "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXtjlu/UaAZnotSH+zGeSHs="
+      ];
+    };
+    gc = {
+      automatic = lib.mkDefault true;
+      dates = lib.mkDefault "weekly";
+      options = lib.mkDefault "--delete-older-than 7d";
+    };
   };
 
   programs.direnv = {
@@ -92,6 +111,10 @@
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;
+
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+    ];
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
