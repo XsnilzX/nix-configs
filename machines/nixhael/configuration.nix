@@ -44,7 +44,7 @@
   environment.variables = {
     RADV_PERFTEST = "aco";
     AMD_VULKAN_ICD = "RADV";
-    MANGOHUD = "1";
+    MANGOHUD = "0";
   };
 
   nixpkgs.config.allowUnfree = true;
