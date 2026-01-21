@@ -25,7 +25,10 @@
     targets = {
       gtk.enable = true;
       firefox.profileNames = ["default"];
-      vscode.enable = true;
+      vscode = {
+        enable = true;
+        profileNames = ["default" "Python" "Nix-OS" "iits-1" "Quickshell"];
+      };
       zen-browser.profileNames = ["default"];
       zed.enable = false;
     };
