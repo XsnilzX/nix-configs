@@ -181,7 +181,7 @@
         };
       };
 
-      "iits-1" = {
+      "Java" = {
         extensions = with pkgs.vscode-extensions;
           [
             pkief.material-icon-theme
@@ -189,12 +189,9 @@
             continue.continue
             tomoki1207.pdf
             redhat.java
-            vscjava.vscode-gradle
-            vscjava.vscode-maven
           ]
           ++ (with pkgs.vscode-marketplace; [
             # Extensions, die nicht in den offiziellen pkgs sind, kommen hier rein:
-            vmware.vscode-spring-boot
           ]);
 
         # Extensions aktivieren

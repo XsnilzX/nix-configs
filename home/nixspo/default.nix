@@ -27,7 +27,7 @@
       firefox.profileNames = ["default"];
       vscode = {
         enable = true;
-        profileNames = ["default" "Python" "Nix-OS" "iits-1" "Quickshell"];
+        profileNames = ["default" "Python" "Nix-OS" "Java" "Quickshell"];
       };
       zen-browser.profileNames = ["default"];
       zed.enable = false;
