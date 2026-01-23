@@ -30,7 +30,7 @@
         profileNames = ["default" "Python" "Nix-OS" "Java" "Quickshell"];
       };
       zen-browser.profileNames = ["default"];
-      zed.enable = false;
+      zed.enable = true;
     };
   };
 
