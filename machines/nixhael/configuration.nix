@@ -32,19 +32,10 @@
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-
-    extraPackages = with pkgs; [
-      mesa
-      vulkan-loader
-      vulkan-tools
-      vulkan-validation-layers
-    ];
   };
 
   environment.variables = {
-    RADV_PERFTEST = "aco";
     AMD_VULKAN_ICD = "RADV";
-    MANGOHUD = "0";
   };
 
   nixpkgs.config.allowUnfree = true;
@@ -64,5 +55,13 @@
     displayManager.sddm.enable = true;
 
     displayManager.sddm.wayland.enable = true;
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      jack.enable = true;
+    };
   };
 }
