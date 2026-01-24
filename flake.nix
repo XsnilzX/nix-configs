@@ -12,6 +12,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-cachyos-kernel = {
+      url = "github:xddxdd/nix-cachyos-kernel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,6 +32,7 @@
     self,
     nixpkgs,
     nix-vscode-extensions,
+    nix-cachyos-kernel,
     home-manager,
     sops-nix,
     stylix,
@@ -47,7 +52,7 @@
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
-            nixpkgs.overlays = [nix-vscode-extensions.overlays.default];
+            nixpkgs.overlays = [nix-vscode-extensions.overlays.default nix-cachyos-kernel.overlays.default];
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
@@ -75,7 +80,7 @@
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
-            nixpkgs.overlays = [nix-vscode-extensions.overlays.default];
+            nixpkgs.overlays = [nix-vscode-extensions.overlays.default nix-cachyos-kernel.overlays.default];
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;

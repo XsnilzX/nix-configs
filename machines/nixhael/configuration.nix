@@ -14,7 +14,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest;
 
   boot.kernelParams = [
     "amd_pstate=active"
@@ -39,6 +39,7 @@
   };
 
   nixpkgs.config.allowUnfree = true;
+  #nixpkgs.overlays = [nix-cachyos-kernel.overlays.pinned];
 
   networking.hostName = "nixhael"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.

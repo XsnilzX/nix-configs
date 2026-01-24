@@ -73,11 +73,14 @@
       warn-dirty = false;
       builders-use-substitutes = true;
 
+      substituters = ["https://cache.garnix.io"];
+
       trusted-substituters = [
         "https://cache.flox.dev"
       ];
       trusted-public-keys = [
         "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXtjlu/UaAZnotSH+zGeSHs="
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
       ];
     };
     gc = {
