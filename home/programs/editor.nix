@@ -203,6 +203,22 @@
         };
       };
 
+      "Typst" = {
+        extensions = with pkgs.vscode-extensions; [
+          pkief.material-icon-theme
+          esbenp.prettier-vscode
+          continue.continue
+          tomoki1207.pdf
+          myriad-dreamin.tinymist
+        ];
+
+        userSettings = {
+          "workbench.iconTheme" = "material-icon-theme";
+          "editor.formatOnSave" = true;
+          "git.autofetch" = true;
+        };
+      };
+
       "Quickshell" = {
         extensions = with pkgs.vscode-extensions;
           [
