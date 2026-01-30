@@ -135,6 +135,7 @@
           "editor.formatOnSave" = true;
           "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
           "git.autofetch" = true;
+          "git.confirmSync" = false;
           "window.newWindowProfile" = "Default";
         };
       };
@@ -155,6 +156,7 @@
           "workbench.iconTheme" = "material-icon-theme";
           "editor.formatOnSave" = true;
           "git.autofetch" = true;
+          "git.confirmSync" = false;
         };
       };
       "Nix-OS" = {
@@ -178,6 +180,7 @@
           "editor.formatOnSave" = true;
           "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
           "git.autofetch" = true;
+          "git.confirmSync" = false;
         };
       };
 
@@ -200,6 +203,7 @@
           "editor.formatOnSave" = false;
           "redhat.telemetry.enabled" = false;
           "git.autofetch" = true;
+          "git.confirmSync" = false;
         };
       };
 
@@ -216,6 +220,7 @@
           "workbench.iconTheme" = "material-icon-theme";
           "editor.formatOnSave" = true;
           "git.autofetch" = true;
+          "git.confirmSync" = false;
         };
       };
 
@@ -236,6 +241,7 @@
           "workbench.iconTheme" = "material-icon-theme";
           "editor.formatOnSave" = true;
           "git.autofetch" = true;
+          "git.confirmSync" = false;
           "workbench.editorAssociations" = {
             "{git,gitlens,chat-editing-snapshot-text-model,copilot,git-graph,git-graph-3}:/**/*.qrc" = "default";
             "*.qrc" = "qt-core.qrcEditor";
