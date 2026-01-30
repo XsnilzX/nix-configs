@@ -291,18 +291,23 @@
       # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
 
       # Ignore maximize requests from apps. You'll probably like this.
-      windowrulev2 = suppressevent maximize, class:.*
+      window = class:.*; suppressevent maximize
 
       # Fix some dragging issues with XWayland
-      windowrulev2 = nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0
+      window = class:^$, title:^$, xwayland:1, floating:1, fullscreen:0, pinned:0; nofocus
 
       # Fix xwaylandvideobridge
-      windowrulev2 = opacity 0.0 override, class:^(xwaylandvideobridge)$
-      windowrulev2 = noanim, class:^(xwaylandvideobridge)$
-      windowrulev2 = noinitialfocus, class:^(xwaylandvideobridge)$
-      windowrulev2 = maxsize 1 1, class:^(xwaylandvideobridge)$
-      windowrulev2 = noblur, class:^(xwaylandvideobridge)$
-      windowrulev2 = nofocus, class:^(xwaylandvideobridge)$
+      windowrule {
+        name = xwayland-video-bridge-fixes
+        match:class = xwaylandvideobridge
+
+        no_initial_focus = true
+        no_focus = true
+        no_anim = true
+        no_blur = true
+        max_size = 1 1
+        opacity = 0.0
+      }
     '';
   };
 
