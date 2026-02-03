@@ -36,6 +36,7 @@
       kdePackages.partitionmanager
       nh
       exfatprogs
+      easyeffects
     ]
     ++ lib.optionals (machine == "nixhael") [
       gamescope
