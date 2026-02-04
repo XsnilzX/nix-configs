@@ -13,7 +13,20 @@
   i18n.supportedLocales = ["all"];
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      brlaser # Open-Source Brother Treiber
+      # oder:
+      # brgenml1lpr
+      # brgenml1cupswrapper
+    ];
+  };
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+  };
 
   services.pipewire = {
     enable = true;
