@@ -2,8 +2,14 @@
   config,
   pkgs,
   lib,
+  compositor,
   ...
-}: {
+}: let
+  workspaceModule =
+    if compositor == "niri"
+    then "niri/workspaces"
+    else "hyprland/workspaces";
+in {
   programs.waybar = {
     enable = true;
     style = lib.mkForce ''
@@ -117,7 +123,7 @@
         height = 30;
 
         # Wir zeigen jetzt nur 3 Container-Module an
-        modules-left = ["hyprland/workspaces"];
+        modules-left = [workspaceModule];
         modules-center = ["clock" "custom/weather"];
         modules-right = [
           "cpu"

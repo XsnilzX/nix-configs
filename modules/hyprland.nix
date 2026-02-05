@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  lib,
+  compositor,
+  ...
+}:
+lib.mkIf (compositor == "hyprland") {
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;

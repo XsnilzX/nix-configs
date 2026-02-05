@@ -4,6 +4,7 @@
   pkgs,
   inputs,
   machine,
+  compositor,
   ...
 }: {
   time.timeZone = "Europe/Berlin";
@@ -121,6 +122,11 @@
   #nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   programs.zsh.enable = true;
+
+  programs.niri.enable = lib.mkIf (compositor == "niri") true;
+  security.polkit.enable = lib.mkIf (compositor == "niri") true; # polkit
+  services.gnome.gnome-keyring.enable = lib.mkIf (compositor == "niri") true; # secret service
+  security.pam.services.swaylock = lib.mkIf (compositor == "niri") {};
 
   # Steam
   programs.steam = {

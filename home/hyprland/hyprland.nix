@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   wayland.windowManager.hyprland = {
@@ -350,7 +351,7 @@
   };
 
   services.hyprpolkitagent.enable = true;
-  services.udiskie.enable = true;
+  services.udiskie.enable = lib.mkDefault true;
 
   home.packages = with pkgs; [
     waybar

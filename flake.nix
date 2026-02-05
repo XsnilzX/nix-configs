@@ -43,6 +43,7 @@
         system = "x86_64-linux";
         specialArgs = {
           machine = "nixhael";
+          compositor = "kde";
           inherit self inputs;
         };
         modules = [
@@ -60,6 +61,7 @@
               backupFileExtension = "backup";
               extraSpecialArgs = {
                 machine = "nixhael";
+                compositor = "kde";
                 inherit inputs;
               };
             };
@@ -71,6 +73,7 @@
         system = "x86_64-linux";
         specialArgs = {
           machine = "nixspo";
+          compositor = "niri";
           inherit self inputs;
         };
         modules = [
@@ -88,6 +91,7 @@
               backupFileExtension = "backup";
               extraSpecialArgs = {
                 machine = "nixspo";
+                compositor = "niri";
                 inherit inputs;
               };
             };

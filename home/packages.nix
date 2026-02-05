@@ -4,6 +4,7 @@
   inputs,
   lib,
   machine,
+  compositor,
   weatherWidgetPath,
   ...
 }: let
@@ -72,6 +73,8 @@ in {
       pavucontrol
       networkmanagerapplet
       blueman
+    ]
+    ++ lib.optionals (machine == "nixspo" && compositor == "hyprland") [
       hyprpaper
     ]
     ++ lib.optionals (machine == "nixhael") [
