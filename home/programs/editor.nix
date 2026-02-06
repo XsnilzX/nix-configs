@@ -248,6 +248,27 @@
           };
         };
       };
+
+      "Rust" = {
+        extensions = with pkgs.vscode-extensions; [
+          pkief.material-icon-theme
+          esbenp.prettier-vscode
+          continue.continue
+          tomoki1207.pdf
+          # Rust stuff
+          rust-lang.rust-analyzer
+          fill-labs.dependi
+          tamasfe.even-better-toml
+        ];
+
+        userSettings = {
+          "workbench.iconTheme" = "material-icon-theme";
+          "editor.formatOnSave" = true;
+          "git.autofetch" = true;
+          "git.confirmSync" = false;
+          "telemetry.telemetryLevel" = "off";
+        };
+      };
     };
   };
 
