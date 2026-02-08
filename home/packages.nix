@@ -35,14 +35,12 @@ in {
       libnotify
       xdg-utils
       amdgpu_top
-      htop
       fastfetch
       seafile-client
       ncdu
       fd
       ripgrep
       bat
-      lmstudio
       gimp
 
       # Chatting
