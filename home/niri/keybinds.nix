@@ -14,7 +14,7 @@ in {
     volume-down = spawn wpctl ["set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"];
     volume-mute = spawn wpctl ["set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"];
     mic-mute = spawn wpctl ["set-mute" "@DEFAULT_AUDIO_SURCE@" "toggle"];
-    brightness-up = spawn brightnessctl ["s" "%5+"];
+    brightness-up = spawn brightnessctl ["s" "5%+"];
     brightness-down = spawn brightnessctl ["s" "5%-"];
   in {
     "Mod+q".action.spawn = apps.terminal;
@@ -81,6 +81,7 @@ in {
     "Mod+End".action = focus-column-last;
     "Mod+Ctrl+Home".action = move-column-to-first;
     "Mod+Ctrl+End".action = move-column-to-last;
+    "Mod+f".action = maximize-column;
     "Print".action .screenshot = {};
     "Ctrl+Print".action.screenshot-screen = {write-to-disk = true;};
     "Alt+Print".action.screenshot-window = {write-to-disk = true;};
