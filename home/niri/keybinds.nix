@@ -18,8 +18,8 @@ in {
     brightness-down = spawn brightnessctl ["s" "5%-"];
   in {
     "Mod+q".action.spawn = apps.terminal;
-    "Mod+x".action.close-window = {repeat = false;};
-    "Mod+m".action.quit = {skip-confirmation = true;};
+    "Mod+x".action = close-window;
+    "Mod+m".action.quit.skip-confirmation = true;
     "Mod+e".action.spawn = apps.fileManager;
     "Mod+v".action = toggle-window-floating;
     "Mod+Space".action.spawn = apps.appLauncher;

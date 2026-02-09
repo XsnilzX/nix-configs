@@ -55,7 +55,7 @@
             height = 1800;
             refresh = 120.001;
           };
-          scale = 1.0;
+          scale = 1.8;
           position = {
             x = 0;
             y = 0;

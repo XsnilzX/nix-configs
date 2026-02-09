@@ -76,6 +76,9 @@ in {
     ++ lib.optionals (machine == "nixspo" && compositor == "hyprland") [
       hyprpaper
     ]
+    ++ lib.optionals (machine == "nixspo" && compositor == "niri") [
+      swaybg
+    ]
     ++ lib.optionals (machine == "nixhael") [
       # Optional
       lunar-client
