@@ -4,7 +4,7 @@
   ...
 }: let
   scriptPath = "${config.home.homeDirectory}/.config/niri/scripts/wallpaper-cycle.sh";
-  mainMod = "Mod";
+  #mainMod = "Mod";
   terminal = "ghostty";
   fileManager = "thunar";
   menu = "anyrun";
@@ -125,10 +125,10 @@ in {
       Mod+Shift+Slash { show-hotkey-overlay; }
       Mod+O repeat=false { toggle-overview; }
 
-      Mod+H { focus-column-left; }
-      Mod+J { focus-window-down; }
-      Mod+K { focus-window-up; }
-      Mod+L { focus-column-right; }
+      //Mod+H { focus-column-left; }
+      //Mod+J { focus-window-down; }
+      //Mod+K { focus-window-up; }
+      //Mod+L { focus-column-right; }
 
       Mod+Ctrl+H { move-column-left; }
       Mod+Ctrl+J { move-window-down; }
@@ -164,8 +164,8 @@ in {
       Mod+Shift+U { move-workspace-down; }
       Mod+Shift+I { move-workspace-up; }
 
-      Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
-      Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
+      //Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+      //Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
       Mod+Ctrl+WheelScrollDown cooldown-ms=150 { move-column-to-workspace-down; }
       Mod+Ctrl+WheelScrollUp cooldown-ms=150 { move-column-to-workspace-up; }
 
