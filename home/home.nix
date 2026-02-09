@@ -30,10 +30,6 @@
     languagePacks = ["de" "en-US"];
   };
 
-  home.packages = [
-    inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
-  ];
-
   programs.firefox = {
     enable = true;
     languagePacks = ["de"];

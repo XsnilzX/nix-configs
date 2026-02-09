@@ -39,7 +39,11 @@
     stylix,
     niri,
     ...
-  }: {
+  }: let
+    myOverlay = final: prev: {
+      helium = inputs.helium.packages.${prev.stdenv.hostPlatform.system}.default;
+    };
+  in {
     nixosConfigurations = {
       nixhael = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -55,7 +59,7 @@
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
-            nixpkgs.overlays = [nix-vscode-extensions.overlays.default nix-cachyos-kernel.overlays.default];
+            nixpkgs.overlays = [nix-vscode-extensions.overlays.default nix-cachyos-kernel.overlays.default myOverlay];
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
@@ -85,7 +89,7 @@
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
-            nixpkgs.overlays = [nix-vscode-extensions.overlays.default nix-cachyos-kernel.overlays.default];
+            nixpkgs.overlays = [nix-vscode-extensions.overlays.default nix-cachyos-kernel.overlays.default myOverlay];
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;

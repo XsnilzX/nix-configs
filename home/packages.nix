@@ -46,6 +46,7 @@ in {
       # Chatting
       element-desktop
       discord
+      helium
 
       # nix ide
       alejandra
