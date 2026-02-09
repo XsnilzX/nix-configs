@@ -5,11 +5,14 @@
 }: {
   programs.niri = {
     enable = true;
-    packag = pkgs.niri;
+    package = pkgs.niri;
     settings = {
       prefer-no-csd = true;
 
-      #hotkey-overlay.skip-at-startup = true;
+      hotkey-overlay = {
+        #skip-at-startup = true;
+        hide-not-bound = true;
+      };
 
       layout = {
         focus-ring = {
@@ -60,7 +63,14 @@
         };
       };
 
-      enviroment = {
+      screenshot-path = "${config.home.homeDirectory}/Bilder/Screenshots from %Y-%m-%d %H-%M-%S.png";
+
+      cursor = {
+        hide-when-typing = true;
+        hide-after-inactive-ms = 2000;
+      };
+
+      environment = {
         CLUTTER_BACKEND = "wayland";
         GDK_BACKEND = "wayland,x11";
         MOZ_ENABLE_WAYLAND = "1";
