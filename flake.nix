@@ -17,6 +17,7 @@
       url = "github:xddxdd/nix-cachyos-kernel";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    my-quickshell.url = "github:XsnilzX/my-quickshell";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -37,6 +38,7 @@
     home-manager,
     sops-nix,
     stylix,
+    my-quickshell,
     niri,
     ...
   }: let
@@ -93,6 +95,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              sharedModules = [my-quickshell.homeManagerModules.default];
               users.xsnilzx = import ./home/home.nix;
               backupFileExtension = "backup";
               extraSpecialArgs = {

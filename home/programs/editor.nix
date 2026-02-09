@@ -246,6 +246,7 @@
             "{git,gitlens,chat-editing-snapshot-text-model,copilot,git-graph,git-graph-3}:/**/*.qrc" = "default";
             "*.qrc" = "qt-core.qrcEditor";
           };
+          "qt-qml.doNotAskForQmllsDownload" = true;
         };
       };
 

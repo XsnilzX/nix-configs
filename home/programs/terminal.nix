@@ -114,7 +114,7 @@
 
         # System
         rebuild = "sudo nixos-rebuild switch --flake .";
-        code = "codium --ozone-platform=wayland";
+        code = "codium";
       };
 
       # Umgebungsvariablen & Init
