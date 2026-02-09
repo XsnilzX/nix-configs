@@ -4,14 +4,19 @@
   ...
 }: let
   scriptPath = "${config.home.homeDirectory}/.config/niri/scripts/wallpaper-cycle.sh";
+  mainMod = "Mod";
+  terminal = "ghostty";
+  fileManager = "thunar";
+  menu = "anyrun";
+  browser = "helium";
+  mail = "thunderbird";
+  code = "vscodium --ozone-platform=wayland";
 in {
-  programs.alacritty.enable = true; # Super+T in the default setting (terminal)
-  programs.fuzzel.enable = true; # Super+D in the default setting (app launcher)
-  programs.swaylock.enable = true; # Super+Alt+L in the default setting (screen locker)
-  programs.waybar.enable = true; # launch on startup in the default setting (bar)
-  services.mako.enable = true; # notification daemon
-  services.swayidle.enable = true; # idle management daemon
-  services.polkit-gnome.enable = true; # polkit
+  programs.swaylock.enable = true;
+  programs.waybar.enable = true;
+  services.mako.enable = true;
+  services.swayidle.enable = true;
+  services.polkit-gnome.enable = true;
   home.packages = with pkgs; [
     swaybg # wallpaper
     xwayland-satellite # xwayland support
@@ -30,58 +35,68 @@ in {
 
     // Beispiel: Fensterplatzierung per App-ID
     window-rule {
-      match app-id="firefox$"
+      match app-id="${browser}$"
       open-on-workspace "2"
     }
 
-    binds {
-      Super+Q { spawn "ghostty"; }
-      Super+X repeat=false { close-window; }
-      Super+M { quit skip-confirmation=true; }
-      Super+E { spawn "thunar"; }
-      Super+V { toggle-window-floating; }
-      Super+Space { spawn "anyrun"; }
-      Super+B { spawn "helium"; }
-      Super+T { spawn "thunderbird"; }
-      Super+C { spawn "vscodium" "--ozone-platform=wayland"; }
-      Super+L { spawn "swaylock"; }
+    input {
+      keyboard {
+        track-layout "global"
+        xkb {
+          layout "de"
+          options "terminate:ctrl_alt_bksp"
+        }
+      }
+    }
 
-      Super+Shift+S {
+    binds {
+      Mod+Q { spawn "${terminal}"; }
+      Mod+X repeat=false { close-window; }
+      Mod+M { quit skip-confirmation=true; }
+      Mod+E { spawn "${fileManager}"; }
+      Mod+V { toggle-window-floating; }
+      Mod+Space { spawn "${menu}"; }
+      Mod+B { spawn "${browser}"; }
+      Mod+T { spawn "${mail}"; }
+      Mod+C { spawn "${code}"; }
+      Mod+L { spawn "swaylock"; }
+
+      Mod+Shift+S {
         spawn-sh "wayshot -f ${config.home.homeDirectory}/Bilder/screenshots/$(date '+%Y%m%d-%H:%M:%S').png";
       }
-      Super+S {
+      Mod+S {
         spawn-sh "wayshot -s \"$(slurp)\" -f ${config.home.homeDirectory}/Bilder/screenshots/$(date '+%Y%m%d-%H:%M:%S').png";
       }
 
-      Super+Left { focus-column-left; }
-      Super+Right { focus-column-right; }
-      Super+Up { focus-window-up; }
-      Super+Down { focus-window-down; }
+      Mod+Left { focus-column-left; }
+      Mod+Right { focus-column-right; }
+      Mod+Up { focus-window-up; }
+      Mod+Down { focus-window-down; }
 
-      Super+1 { focus-workspace 1; }
-      Super+2 { focus-workspace 2; }
-      Super+3 { focus-workspace 3; }
-      Super+4 { focus-workspace 4; }
-      Super+5 { focus-workspace 5; }
-      Super+6 { focus-workspace 6; }
-      Super+7 { focus-workspace 7; }
-      Super+8 { focus-workspace 8; }
-      Super+9 { focus-workspace 9; }
-      Super+0 { focus-workspace 10; }
+      Mod+1 { focus-workspace 1; }
+      Mod+2 { focus-workspace 2; }
+      Mod+3 { focus-workspace 3; }
+      Mod+4 { focus-workspace 4; }
+      Mod+5 { focus-workspace 5; }
+      Mod+6 { focus-workspace 6; }
+      Mod+7 { focus-workspace 7; }
+      Mod+8 { focus-workspace 8; }
+      Mod+9 { focus-workspace 9; }
+      Mod+0 { focus-workspace 10; }
 
-      Super+Shift+1 { move-window-to-workspace 1; }
-      Super+Shift+2 { move-window-to-workspace 2; }
-      Super+Shift+3 { move-window-to-workspace 3; }
-      Super+Shift+4 { move-window-to-workspace 4; }
-      Super+Shift+5 { move-window-to-workspace 5; }
-      Super+Shift+6 { move-window-to-workspace 6; }
-      Super+Shift+7 { move-window-to-workspace 7; }
-      Super+Shift+8 { move-window-to-workspace 8; }
-      Super+Shift+9 { move-window-to-workspace 9; }
-      Super+Shift+0 { move-window-to-workspace 10; }
+      Mod+Shift+1 { move-window-to-workspace 1; }
+      Mod+Shift+2 { move-window-to-workspace 2; }
+      Mod+Shift+3 { move-window-to-workspace 3; }
+      Mod+Shift+4 { move-window-to-workspace 4; }
+      Mod+Shift+5 { move-window-to-workspace 5; }
+      Mod+Shift+6 { move-window-to-workspace 6; }
+      Mod+Shift+7 { move-window-to-workspace 7; }
+      Mod+Shift+8 { move-window-to-workspace 8; }
+      Mod+Shift+9 { move-window-to-workspace 9; }
+      Mod+Shift+0 { move-window-to-workspace 10; }
 
-      Super+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
-      Super+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
+      Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+      Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
 
       XF86AudioRaiseVolume allow-when-locked=true {
         spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
