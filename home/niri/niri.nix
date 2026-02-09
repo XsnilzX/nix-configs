@@ -47,6 +47,10 @@ in {
           options "terminate:ctrl_alt_bksp"
         }
       }
+      touchpad {
+        tap
+        natural-scroll
+      }
     }
 
     binds {

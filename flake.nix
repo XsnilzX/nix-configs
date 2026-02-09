@@ -12,6 +12,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    niri.url = "github:sodiboo/niri-flake";
     nix-cachyos-kernel = {
       url = "github:xddxdd/nix-cachyos-kernel";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,6 +37,7 @@
     home-manager,
     sops-nix,
     stylix,
+    niri,
     ...
   }: {
     nixosConfigurations = {
