@@ -73,7 +73,7 @@
         system = "x86_64-linux";
         specialArgs = {
           machine = "nixspo";
-          compositor = "niri";
+          compositor = "hyprland";
           inherit self inputs;
         };
         modules = [
@@ -91,7 +91,7 @@
               backupFileExtension = "backup";
               extraSpecialArgs = {
                 machine = "nixspo";
-                compositor = "niri";
+                compositor = "hyprland";
                 inherit inputs;
               };
             };
