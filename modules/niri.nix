@@ -1,15 +1,27 @@
 {
   lib,
   compositor,
+  pkgs,
   ...
 }:
 lib.mkIf (compositor == "niri") {
   programs.niri.enable = true;
 
-  security.polkit.enable = true; # polkit
-  services.displayManager.ly.enable = true;
-  services.gnome.gnome-keyring.enable = true; # secret service
+  security.polkit.enable = true;
   security.pam.services.swaylock = {};
 
-  programs.waybar.enable = true; # top bar
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+  services = {
+    blueman.enable = true;
+    displayManager.ly.enable = true;
+    gnome.gnome-keyring.enable = true;
+    gvfs.enable = true;
+    tumbler.enable = true;
+  };
 }
