@@ -42,6 +42,7 @@ in {
       ripgrep
       bat
       gimp
+      kdePackages.kcalc
 
       # Chatting
       element-desktop
