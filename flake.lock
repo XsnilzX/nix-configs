@@ -424,11 +424,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1770681226,
-        "narHash": "sha256-iEDudALpqN+tQqZTTOdZU75pTuDQ8F6jUIhzFjInbxQ=",
+        "lastModified": 1770815887,
+        "narHash": "sha256-gkUPvS/uKkhhCqBALRe9t3Ldx0yT5os1PVdr+j/OC4E=",
         "owner": "XsnilzX",
         "repo": "my-quickshell",
-        "rev": "9b0b12db385c1d2343caaeb5c0f02ac0e9a3c2cb",
+        "rev": "e760a69ac8624fd8d0d7bf050fc9c04041b75cef",
         "type": "github"
       },
       "original": {
