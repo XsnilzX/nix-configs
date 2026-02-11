@@ -3,86 +3,100 @@
   pkgs,
   ...
 }: let
-  scriptPath = "${config.home.homeDirectory}/.config/niri/scripts/wallpaper-cycle.sh";
+  wallpaperScript = pkgs.writeShellScriptBin "random-wallpaper" ''
+    #!/usr/bin/env bash
+    set -euo pipefail
+
+    WALLPAPER_DIR="${config.home.homeDirectory}/Bilder/Wallpaper"
+    CACHE_DIR="$HOME/.cache/wallpaper-cycler"
+    FILELIST="$CACHE_DIR/files"
+    HASHFILE="$CACHE_DIR/hash"
+
+    mkdir -p "$CACHE_DIR"
+
+    if [ ! -d "$WALLPAPER_DIR" ]; then
+      exit 0
+    fi
+
+    # ---- Hash berechnen (nur filenames + mtime) ----
+    NEW_HASH=$(
+      ${pkgs.findutils}/bin/find "$WALLPAPER_DIR" -type f \
+        \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp" \) \
+        -printf "%p %T@\n" \
+      | ${pkgs.coreutils}/bin/sort \
+      | ${pkgs.coreutils}/bin/sha256sum \
+      | ${pkgs.coreutils}/bin/cut -d' ' -f1
+    )
+
+    OLD_HASH=""
+    [ -f "$HASHFILE" ] && OLD_HASH=$(cat "$HASHFILE")
+
+    # ---- Cache nur neu bauen wenn nötig ----
+    if [ "$NEW_HASH" != "$OLD_HASH" ]; then
+      ${pkgs.findutils}/bin/find "$WALLPAPER_DIR" -type f \
+        \( -iname "*.jpg" -o -iname "*.png" -o -iname "*.jpeg" -o -iname "*.webp" \) \
+        > "$FILELIST"
+      echo "$NEW_HASH" > "$HASHFILE"
+    fi
+
+    if [ ! -s "$FILELIST" ]; then
+      exit 0
+    fi
+
+    # ---- swww daemon starten falls nötig ----
+    if ! pgrep -x swww-daemon > /dev/null; then
+      ${pkgs.swww}/bin/swww-daemon >/dev/null 2>&1 &
+      sleep 0.5
+    fi
+
+    # ---- Outputs holen ----
+    OUTPUTS=$(${pkgs.niri}/bin/niri msg --json outputs | ${pkgs.jq}/bin/jq -r '.[].name')
+
+    # ---- Pro Output zufälliges Wallpaper ----
+    while read -r OUTPUT; do
+      FILE=$(${pkgs.coreutils}/bin/shuf -n 1 "$FILELIST")
+
+      ${pkgs.swww}/bin/swww img "$FILE" \
+        --outputs "$OUTPUT" \
+        --transition-type fade \
+        --transition-duration 1.8 \
+        --transition-fps 60
+    done <<< "$OUTPUTS"
+  '';
 in {
-  home.file.".config/niri/scripts/wallpaper-cycle.sh" = {
-    executable = true;
-    text = ''
-      #!${pkgs.bash}/bin/bash
-      set -euo pipefail
+  home.packages = with pkgs; [
+    swww
+    jq
+    wallpaperScript
+  ];
 
-      WALLPAPER_DIR="${config.home.homeDirectory}/Bilder/Wallpaper"
-      INTERVAL=300
-
-      FIND=${pkgs.findutils}/bin/find
-      SHUF=${pkgs.coreutils}/bin/shuf
-      PKILL=${pkgs.procps}/bin/pkill
-      SWAYBG=${pkgs.swaybg}/bin/swaybg
-      SLEEP=${pkgs.coreutils}/bin/sleep
-      ID=${pkgs.coreutils}/bin/id
-
-      if [ -z "''${WAYLAND_DISPLAY:-}" ]; then
-        runtime_dir="''${XDG_RUNTIME_DIR:-/run/user/$($ID -u)}"
-
-        if [ -d "$runtime_dir" ]; then
-          while IFS= read -r socket; do
-            if [ -n "$socket" ]; then
-              WAYLAND_DISPLAY="''${socket##*/}"
-              export WAYLAND_DISPLAY
-              break
-            fi
-          done < <($FIND "$runtime_dir" -maxdepth 1 -type s -name "wayland-*")
-        fi
-      fi
-
-      while true; do
-        if [ -z "''${WAYLAND_DISPLAY:-}" ]; then
-          $SLEEP 5
-          continue
-        fi
-
-        if [ ! -d "$WALLPAPER_DIR" ]; then
-          $SLEEP "$INTERVAL"
-          continue
-        fi
-
-        mapfile -t wallpapers < <(
-          $FIND "$WALLPAPER_DIR" -maxdepth 1 -type f \
-            \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \)
-        )
-
-        if [ "''${#wallpapers[@]}" -eq 0 ]; then
-          $SLEEP "$INTERVAL"
-          continue
-        fi
-
-        random_background=$(printf '%s\n' "''${wallpapers[@]}" | $SHUF -n 1)
-
-        if [ -n "$random_background" ]; then
-          $PKILL swaybg || true
-          $SWAYBG -i "$random_background" -m fill &
-        fi
-
-        $SLEEP "$INTERVAL"
-      done
-    '';
-  };
-
-  systemd.user.services.niri-wallpaper-cycle = {
+  # --- Service ---
+  systemd.user.services.random-wallpaper = {
     Unit = {
-      Description = "Niri wallpaper cycle";
+      Description = "Random Wallpaper (performance optimized)";
       After = ["graphical-session.target"];
-      PartOf = ["graphical-session.target"];
     };
 
     Service = {
-      ExecStart = "${pkgs.bash}/bin/bash ${scriptPath}";
-      Restart = "always";
-      RestartSec = 5;
+      Type = "oneshot";
+      ExecStart = "${wallpaperScript}/bin/random-wallpaper";
+    };
+  };
+
+  # --- Timer (alle 10 Minuten) ---
+  systemd.user.timers.random-wallpaper = {
+    Unit = {
+      Description = "Wallpaper rotation timer";
+    };
+
+    Timer = {
+      OnBootSec = "30s";
+      OnUnitActiveSec = "10m";
+      Unit = "random-wallpaper.service";
     };
 
     Install = {
-      WantedBy = ["graphical-session.target"];
+      WantedBy = ["timers.target"];
     };
   };
 }

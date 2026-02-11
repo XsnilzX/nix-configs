@@ -42,7 +42,6 @@ in {
       ripgrep
       bat
       gimp
-      kdePackages.kcalc
 
       # Chatting
       element-desktop
@@ -78,7 +77,7 @@ in {
       hyprpaper
     ]
     ++ lib.optionals (machine == "nixspo" && compositor == "niri") [
-      swaybg
+      # Optional Packages
     ]
     ++ lib.optionals (machine == "nixhael") [
       # Optional
