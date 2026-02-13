@@ -270,6 +270,30 @@
           "telemetry.telemetryLevel" = "off";
         };
       };
+
+      "Go" = {
+        extensions = with pkgs.vscode-extensions; [
+          pkief.material-icon-theme
+          esbenp.prettier-vscode
+          continue.continue
+          golang.go
+          usernamehw.errorlens
+        ];
+
+        userSettings = {
+          "workbench.iconTheme" = "material-icon-theme";
+          "editor.formatOnSave" = true;
+          "git.autofetch" = true;
+          "git.confirmSync" = false;
+          "go.useLanguageServer" = true;
+          "go.lintTool" = "golangci-lint";
+          "go.formatTool" = "goimports";
+          "gopls" = {
+            "ui.semanticTokens" = true;
+            "formatting.gofumpt" = true;
+          };
+        };
+      };
     };
   };
 
