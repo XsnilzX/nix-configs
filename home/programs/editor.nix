@@ -71,6 +71,14 @@
           name = "java";
           language-servers = ["jdtls"];
         }
+        {
+          name = "nix";
+          auto-format = true;
+          language-servers = ["nixd"];
+          formatter = {
+            command = "${pkgs.alejandra}/bin/alejandra";
+          };
+        }
       ];
       language-server = {
         clangd = {
@@ -100,7 +108,10 @@
           command = "rust-analyzer";
         };
         tinymist = {
-          command = "tinymist";
+          command = "${pkgs.tinymist}/bin/tinymist";
+        };
+        nixd = {
+          command = "${pkgs.nixd}/bin/nixd";
         };
       };
     };
