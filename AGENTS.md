@@ -1,103 +1,155 @@
 # AGENTS.md
-# Guidance for coding agents working in this repo.
 
-## Scope and layout
-- This is a Nix flake repo for NixOS + Home Manager configuration.
-- Key paths:
-  - flake: `flake.nix`, `flake.lock`
-  - machines: `machines/<name>/configuration.nix`
-  - shared modules: `modules/`
-  - home-manager: `home/` (including `home/home.nix` and program modules)
-  - secrets: `secrets/` (SOPS-managed)
+Guidance for coding agents working in this repository.
 
-## Build / lint / test commands
-- There are no explicit test suites in this repo; prefer `nix flake check`.
+## Repository scope
 
-### Build
-- Build a NixOS system (no switch):
+- This repo is a Nix flake for NixOS + Home Manager.
+- Flake entry points: `flake.nix`, `flake.lock`.
+- Host configs: `machines/nixspo/` and `machines/nixhael/`.
+- Shared system module: `machines/share.nix`.
+- Shared NixOS modules: `modules/`.
+- Home Manager root: `home/home.nix`.
+- Home modules: `home/programs/`, `home/niri/`, `home/hyprland/`, per-host dirs.
+- Secrets are managed through sops-nix modules under `modules/sops/`.
+
+## Environment assumptions
+
+- Platform is Linux with flakes enabled.
+- Commands are expected to run from repo root.
+- This flake currently exposes only `nixosConfigurations` outputs.
+- Available host names in flake outputs: `nixspo`, `nixhael`.
+
+## Build, lint, and test commands
+
+### Core validation commands
+
+- Run the full flake checks (best default validation):
+  - `nix flake check -L --show-trace`
+- Show available flake outputs:
+  - `nix flake show`
+
+### Build commands
+
+- Build one host system closure without switching:
   - `nix build .#nixosConfigurations.<machine>.config.system.build.toplevel`
-  - Example: `nix build .#nixosConfigurations.nixspo.config.system.build.toplevel`
-- Switch on a target host (requires sudo and correct hostname):
+- Build `nixspo` specifically:
+  - `nix build .#nixosConfigurations.nixspo.config.system.build.toplevel`
+- Build `nixhael` specifically:
+  - `nix build .#nixosConfigurations.nixhael.config.system.build.toplevel`
+- Rebuild/switch on a host (destructive on running system; use only when asked):
   - `sudo nixos-rebuild switch --flake .#<machine>`
 
-### Lint / format
-- Nix formatting uses Alejandra (configured in editor settings).
-  - Format a file or repo: `alejandra path/to/file.nix` or `alejandra .`
-- No linting tools (statix/deadnix) are configured in this repo.
+### Lint/format commands
 
-### Tests / checks
-- Run all flake checks:
-  - `nix flake check -L --show-trace`
-- Single check (only if checks are later added):
+- Formatter in use: Alejandra.
+- Format entire repo:
+  - `alejandra .`
+- Format one file:
+  - `alejandra path/to/file.nix`
+- Optional syntax parse for a single file:
+  - `nix-instantiate --parse path/to/file.nix`
+- No dedicated lint tools are configured here (no statix/deadnix config present).
+
+### "Single test" guidance
+
+- There is no unit-test framework in this repo.
+- For agent workflows, treat a targeted single-host build as the closest
+  equivalent to a single test.
+- Preferred "single test" commands:
+  - `nix build .#nixosConfigurations.nixspo.config.system.build.toplevel`
+  - `nix build .#nixosConfigurations.nixhael.config.system.build.toplevel`
+- If explicit checks are added later, run one check with:
   - `nix build .#checks.x86_64-linux.<check-name>`
 
 ## Code style and conventions
 
 ### Formatting
-- 2-space indent; align with existing files (no tabs).
-- One attribute per line in attribute sets and lists.
-- Use `let ... in` for helper values that are reused.
-- Keep trailing commas out of Nix lists/attrs (match existing style).
+
+- Use 2-space indentation; no tabs.
+- Keep attribute formatting consistent with surrounding code.
+- End Nix attributes with semicolons.
+- Keep lists and attrsets readable, usually one logical item per line.
+- Prefer running Alejandra after edits to `.nix` files.
+- Do not reformat unrelated files.
 
 ### Imports and module structure
-- `imports = [ ... ];` with relative paths.
-- Keep machine-specific config in `machines/<name>/`.
-- Keep shared config in `modules/` or `home/programs/`.
-- Prefer `lib.optionals` for conditional lists.
 
-### Naming
-- Files and directories: lowercase names, hyphen-separated when needed.
-- Nix attributes: lowerCamelCase for option names; keep consistent with NixOS
-  option names.
-- Machine selectors use `machine == "nixspo"` / `"nixhael"`.
+- Keep host-specific settings in `machines/<host>/`.
+- Keep cross-host settings in `machines/share.nix` or `modules/`.
+- Keep user-space program config under `home/programs/`.
+- Use relative paths in `imports = [ ... ];`.
+- Follow existing split-by-feature module boundaries.
+- In shared modules, gate host/compositor specifics with conditions.
 
-### Strings and paths
-- Use double quotes for strings.
-- Prefer interpolated paths like "${config.home.homeDirectory}".
-- Keep paths relative when possible inside modules.
+### Nix idioms and types
 
-### Packages and programs
-- Use `with pkgs; [ ... ]` in package lists, matching current style.
-- Keep package lists grouped by purpose with short comments.
-- Avoid unnecessary reordering; preserve existing grouping.
+- Prefer `lib.optionals` for conditional list concatenation.
+- Prefer `lib.mkIf` for conditional attribute sets.
+- Use `lib.mkDefault` for soft defaults.
+- Use `lib.mkForce` only when intentional override is required.
+- Use `let ... in` when values are reused or improve readability.
+- Keep option value types aligned with NixOS/Home Manager module expectations.
 
-### Types and Nix idioms
-- Use `lib.mkForce` or `lib.mkDefault` when overriding behavior.
-- Use `lib.optionals` instead of `if` where you are building lists.
-- For machine-specific values, prefer `lib.optionals` and `machine` arg.
+### Naming conventions
 
-### Error handling and safety
-- Avoid hardcoding secrets or tokens in Nix files.
-- Never commit plaintext secrets; use SOPS-managed files in `secrets/`.
-- When touching `secrets/`, use `sops` for edits and keep `.sops.yaml` in sync
-  with any new keys.
+- File and directory names should stay lowercase.
+- Use hyphenated filenames where appropriate (existing convention).
+- Keep option and local variable names descriptive and consistent.
+- Preserve existing host identifiers exactly: `nixspo`, `nixhael`.
+- Do not rename public module paths unless requested.
 
-## Secrets (SOPS)
-- Secrets live in `secrets/*.yaml` and are managed by `sops-nix`.
-- The key file is configured at `/var/lib/sops-nix/key.txt`.
-- Do not add unencrypted secrets to the repo.
+### Strings, paths, and package lists
 
-## Editor/formatting hints found in repo
-- Alejandra is the configured Nix formatter (see `home/programs/editor.nix`).
-- Format-on-save is enabled in editor profiles; keep code formatted.
+- Use double-quoted strings.
+- Prefer interpolation for derived paths, e.g.
+  `${config.home.homeDirectory}/...`.
+- Prefer relative import paths inside the repo.
+- Use `with pkgs; [ ... ]` in package lists where already used.
+- Keep package lists grouped by purpose; avoid unnecessary reordering.
 
-## Cursor/Copilot rules
-- No `.cursor/rules/`, `.cursorrules`, or `.github/copilot-instructions.md`
-  files are present in this repo at this time.
+### Comments and readability
 
-## Practical workflow for agents
-- Start by identifying the target machine: `nixspo` or `nixhael`.
-- Update the relevant module file and keep changes scoped.
-- Format Nix files with Alejandra.
-- Run `nix flake check` before suggesting a rebuild.
+- Keep existing language and comment style intact when modifying nearby code.
+- Add comments only for non-obvious reasoning.
+- Remove stale comments when they become incorrect.
 
-## Notes about this repo
-- `home/home.nix` is shared and conditionally imports modules based on
-  `machine`.
-- `machines/share.nix` and `modules/*` are used by both machines.
-- Some options are set in Home Manager (programs) rather than NixOS.
+## Error handling and safety
+
+- Never hardcode credentials, tokens, or plaintext secrets.
+- Secrets should stay in SOPS-managed files and sops-nix wiring.
+- Keep sops key path assumptions intact (`/var/lib/sops-nix/key.txt`).
+- Avoid changing security-sensitive settings unless requested.
+- Avoid destructive system actions (switch/reboot) unless explicitly asked.
+
+## Secrets and sensitive files
+
+- sops-nix is integrated via `modules/sops/` and host-specific sops modules.
+- If secret definitions are touched, keep ownership and paths consistent.
+- Never commit decrypted secret material.
+- Do not invent new secret files or keys without user request.
+
+## Cursor and Copilot instructions
+
+- Checked locations:
+  - `.cursor/rules/`
+  - `.cursorrules`
+  - `.github/copilot-instructions.md`
+- Result: none of these files exist in the current repository state.
+
+## Agent workflow for this repo
+
+- Identify target host early (`nixspo` or `nixhael`).
+- Keep changes scoped to the relevant module(s).
+- Prefer minimal diffs that match existing patterns.
+- Run Alejandra on changed Nix files.
+- Run `nix flake check -L --show-trace` when feasible.
+- For quick verification, run a single-host `nix build`.
+- Report exactly what was validated and what was not run.
 
 ## Things to avoid
-- Do not reformat unrelated files.
-- Do not remove machine-specific settings unless requested.
-- Do not rewrite `secrets/` files without using `sops`.
+
+- Do not remove machine-specific logic unless requested.
+- Do not move config between NixOS and Home Manager without reason.
+- Do not edit `flake.lock` unless dependency updates are requested.
+- Do not add new tooling assumptions not already present in repo.
