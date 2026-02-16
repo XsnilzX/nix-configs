@@ -14,6 +14,4 @@
       };
     };
   };
-
-  services.udiskie.enable = machine == "nixspo";
 }

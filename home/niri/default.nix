@@ -19,7 +19,13 @@
 
   programs.swaylock.enable = true;
   programs.waybar.enable = true;
-  services.mako.enable = true;
-  services.swayidle.enable = true;
-  services.polkit-gnome.enable = true;
+  services = {
+    mako.enable = true;
+    swayidle.enable = true;
+    polkit-gnome.enable = true;
+    udiskie = {
+      enable = true;
+      tray = "auto";
+    };
+  };
 }
