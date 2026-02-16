@@ -65,7 +65,7 @@
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
-            nixpkgs.overlays = [nix-vscode-extensions.overlays.default nix-cachyos-kernel.overlays.default myOverlay];
+            nixpkgs.overlays = [nix-vscode-extensions.overlays.default nix-cachyos-kernel.overlays.pinned myOverlay];
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
@@ -95,7 +95,7 @@
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
-            nixpkgs.overlays = [nix-vscode-extensions.overlays.default nix-cachyos-kernel.overlays.default myOverlay];
+            nixpkgs.overlays = [nix-vscode-extensions.overlays.default nix-cachyos-kernel.overlays.pinned myOverlay];
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
