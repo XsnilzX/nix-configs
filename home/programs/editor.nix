@@ -71,6 +71,14 @@
           name = "java";
           language-servers = ["jdtls"];
         }
+        {
+          name = "nix";
+          auto-format = true;
+          language-servers = ["nixd"];
+          formatter = {
+            command = "${pkgs.alejandra}/bin/alejandra";
+          };
+        }
       ];
       language-server = {
         clangd = {
@@ -100,7 +108,10 @@
           command = "rust-analyzer";
         };
         tinymist = {
-          command = "tinymist";
+          command = "${pkgs.tinymist}/bin/tinymist";
+        };
+        nixd = {
+          command = "${pkgs.nixd}/bin/nixd";
         };
       };
     };
@@ -246,6 +257,7 @@
             "{git,gitlens,chat-editing-snapshot-text-model,copilot,git-graph,git-graph-3}:/**/*.qrc" = "default";
             "*.qrc" = "qt-core.qrcEditor";
           };
+          "qt-qml.doNotAskForQmllsDownload" = true;
         };
       };
 
@@ -267,6 +279,30 @@
           "git.autofetch" = true;
           "git.confirmSync" = false;
           "telemetry.telemetryLevel" = "off";
+        };
+      };
+
+      "Go" = {
+        extensions = with pkgs.vscode-extensions; [
+          pkief.material-icon-theme
+          esbenp.prettier-vscode
+          continue.continue
+          golang.go
+          usernamehw.errorlens
+        ];
+
+        userSettings = {
+          "workbench.iconTheme" = "material-icon-theme";
+          "editor.formatOnSave" = true;
+          "git.autofetch" = true;
+          "git.confirmSync" = false;
+          "go.useLanguageServer" = true;
+          "go.lintTool" = "golangci-lint";
+          "go.formatTool" = "goimports";
+          "gopls" = {
+            "ui.semanticTokens" = true;
+            "formatting.gofumpt" = true;
+          };
         };
       };
     };

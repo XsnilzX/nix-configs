@@ -46,6 +46,7 @@ in {
       # Chatting
       element-desktop
       discord
+      helium
 
       # nix ide
       alejandra
@@ -59,7 +60,7 @@ in {
       python313
 
       # Nix tools
-      inputs.flox.packages.${pkgs.system}.default
+      inputs.flox.packages.${pkgs.stdenv.hostPlatform.system}.default
       devbox
       direnv
       nix-direnv
@@ -74,6 +75,9 @@ in {
     ]
     ++ lib.optionals (machine == "nixspo" && compositor == "hyprland") [
       hyprpaper
+    ]
+    ++ lib.optionals (machine == "nixspo" && compositor == "niri") [
+      # Optional Packages
     ]
     ++ lib.optionals (machine == "nixhael") [
       # Optional
