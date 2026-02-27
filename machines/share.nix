@@ -53,6 +53,7 @@
       nh
       exfatprogs
       easyeffects
+      wireguard-tools
     ]
     ++ lib.optionals (machine == "nixhael") [
       gamescope
