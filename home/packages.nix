@@ -43,7 +43,7 @@ in {
       bat
       gimp
       qbittorrent
-      protonplus
+      protonvpn-gui
 
       # Chatting
       element-desktop
@@ -88,6 +88,7 @@ in {
       heroic
       mangohud
       goverlay
+      protonplus
     ];
 
   xdg.desktopEntries.discord = {
