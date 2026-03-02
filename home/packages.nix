@@ -42,6 +42,8 @@ in {
       ripgrep
       bat
       gimp
+      qbittorrent
+      protonplus
 
       # Chatting
       element-desktop
@@ -86,7 +88,6 @@ in {
       heroic
       mangohud
       goverlay
-      protonplus
     ];
 
   xdg.desktopEntries.discord = {
