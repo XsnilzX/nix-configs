@@ -49,6 +49,7 @@ in {
       element-desktop
       discord
 
+      prismlauncher
       lunar-client
       helium
 
@@ -84,7 +85,6 @@ in {
       # Optional Packages
     ]
     ++ lib.optionals (machine == "nixhael") [
-      prismlauncher
       heroic
       mangohud
       goverlay
