@@ -48,6 +48,8 @@ in {
       # Chatting
       element-desktop
       discord
+
+      lunar-client
       helium
 
       # nix ide
@@ -82,8 +84,6 @@ in {
       # Optional Packages
     ]
     ++ lib.optionals (machine == "nixhael") [
-      # Optional
-      lunar-client
       prismlauncher
       heroic
       mangohud
