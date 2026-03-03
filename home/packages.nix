@@ -82,7 +82,7 @@ in {
       hyprpaper
     ]
     ++ lib.optionals (machine == "nixspo" && compositor == "niri") [
-      # Optional Packages
+      xwayland-satellite
     ]
     ++ lib.optionals (machine == "nixhael") [
       heroic
