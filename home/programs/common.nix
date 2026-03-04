@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  machine,
   ...
 }: {
   programs = {
@@ -12,9 +13,5 @@
         # add all hosts
       };
     };
-  };
-
-  services = {
-    udiskie.enable = true;
   };
 }

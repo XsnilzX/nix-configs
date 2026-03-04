@@ -12,6 +12,12 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    niri.url = "github:sodiboo/niri-flake";
+    nix-cachyos-kernel = {
+      url = "github:xddxdd/nix-cachyos-kernel";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    my-quickshell.url = "github:XsnilzX/my-quickshell";
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,16 +34,24 @@
     self,
     nixpkgs,
     nix-vscode-extensions,
+    nix-cachyos-kernel,
     home-manager,
     sops-nix,
     stylix,
+    my-quickshell,
+    niri,
     ...
-  }: {
+  }: let
+    myOverlay = final: prev: {
+      helium = inputs.helium.packages.${prev.stdenv.hostPlatform.system}.default;
+    };
+  in {
     nixosConfigurations = {
       nixhael = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           machine = "nixhael";
+          compositor = "kde";
           inherit self inputs;
         };
         modules = [
@@ -47,7 +61,7 @@
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
-            nixpkgs.overlays = [nix-vscode-extensions.overlays.default];
+            nixpkgs.overlays = [nix-vscode-extensions.overlays.default nix-cachyos-kernel.overlays.pinned myOverlay];
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
@@ -55,6 +69,7 @@
               backupFileExtension = "backup";
               extraSpecialArgs = {
                 machine = "nixhael";
+                compositor = "kde";
                 inherit inputs;
               };
             };
@@ -66,6 +81,7 @@
         system = "x86_64-linux";
         specialArgs = {
           machine = "nixspo";
+          compositor = "niri";
           inherit self inputs;
         };
         modules = [
@@ -75,14 +91,16 @@
           home-manager.nixosModules.home-manager
           {
             nixpkgs.config.allowUnfree = true;
-            nixpkgs.overlays = [nix-vscode-extensions.overlays.default];
+            nixpkgs.overlays = [nix-vscode-extensions.overlays.default nix-cachyos-kernel.overlays.pinned myOverlay];
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              sharedModules = [my-quickshell.homeManagerModules.default];
               users.xsnilzx = import ./home/home.nix;
               backupFileExtension = "backup";
               extraSpecialArgs = {
                 machine = "nixspo";
+                compositor = "niri";
                 inherit inputs;
               };
             };

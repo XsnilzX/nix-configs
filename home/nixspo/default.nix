@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./ssh-nixspo.nix
+    ./stylix.nix
   ];
 
   home.sessionVariables = {
@@ -25,8 +26,12 @@
     targets = {
       gtk.enable = true;
       firefox.profileNames = ["default"];
+      vscode = {
+        enable = true;
+        profileNames = ["default" "Python" "Nix-OS" "Java" "Quickshell" "Typst" "Rust"];
+      };
       zen-browser.profileNames = ["default"];
-      zed.enable = false;
+      zed.enable = true;
     };
   };
 

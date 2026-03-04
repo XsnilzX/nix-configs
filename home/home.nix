@@ -2,6 +2,7 @@
   inputs,
   lib,
   machine,
+  compositor,
   config,
   pkgs,
   ...
@@ -16,8 +17,10 @@
       ./programs
       ./packages.nix
     ]
-    ++ lib.optionals (machine == "nixspo") [./hyprland ./nixspo] # Optional enable niri ./niri
-    ++ lib.optionals (machine == "nixhael") [./nixhael];
+    ++ lib.optionals (machine == "nixspo") [./nixspo]
+    ++ lib.optionals (machine == "nixhael") [./nixhael]
+    ++ lib.optionals (compositor == "hyprland") [./hyprland]
+    ++ lib.optionals (compositor == "niri") [./niri];
 
   # Gemeinsame Variablen
   _module.args.weatherWidgetPath = "${config.home.homeDirectory}/Git/weather-widget";
@@ -26,10 +29,6 @@
     enable = true;
     languagePacks = ["de" "en-US"];
   };
-
-  home.packages = [
-    inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.default
-  ];
 
   programs.firefox = {
     enable = true;

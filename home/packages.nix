@@ -4,6 +4,7 @@
   inputs,
   lib,
   machine,
+  compositor,
   weatherWidgetPath,
   ...
 }: let
@@ -34,17 +35,23 @@ in {
       libnotify
       xdg-utils
       amdgpu_top
-      htop
       fastfetch
       seafile-client
       ncdu
       fd
       ripgrep
       bat
+      gimp
+      qbittorrent
+      protonvpn-gui
 
-      # gaming tools
-      protonplus
+      # Chatting
+      element-desktop
       discord
+
+      prismlauncher
+      lunar-client
+      helium
 
       # nix ide
       alejandra
@@ -58,7 +65,7 @@ in {
       python313
 
       # Nix tools
-      inputs.flox.packages.${pkgs.system}.default
+      inputs.flox.packages.${pkgs.stdenv.hostPlatform.system}.default
       devbox
       direnv
       nix-direnv
@@ -70,10 +77,18 @@ in {
       pavucontrol
       networkmanagerapplet
       blueman
+    ]
+    ++ lib.optionals (machine == "nixspo" && compositor == "hyprland") [
       hyprpaper
     ]
+    ++ lib.optionals (machine == "nixspo" && compositor == "niri") [
+      xwayland-satellite
+    ]
     ++ lib.optionals (machine == "nixhael") [
-      # Optional
+      heroic
+      mangohud
+      goverlay
+      protonplus
     ];
 
   xdg.desktopEntries.discord = {

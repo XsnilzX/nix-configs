@@ -14,9 +14,32 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-zen4;
+
+  boot.kernelParams = [
+    "amd_pstate=active"
+  ];
+
+  boot.kernel.sysctl = {
+    "vm.swappiness" = 10;
+    "kernel.sched_autogroup_enabled" = 1;
+  };
+
+  powerManagement.cpuFreqGovernor = "performance";
+
+  programs.gamemode.enable = true;
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+
+  environment.variables = {
+    AMD_VULKAN_ICD = "RADV";
+  };
 
   nixpkgs.config.allowUnfree = true;
+  #nixpkgs.overlays = [nix-cachyos-kernel.overlays.pinned];
 
   networking.hostName = "nixhael"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
@@ -33,5 +56,13 @@
     displayManager.sddm.enable = true;
 
     displayManager.sddm.wayland.enable = true;
+
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      jack.enable = true;
+    };
   };
 }

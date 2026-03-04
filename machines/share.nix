@@ -4,15 +4,9 @@
   pkgs,
   inputs,
   machine,
+  compositor,
   ...
 }: {
-  # do garbage collection weekly to keep disk usage low
-  nix.gc = {
-    automatic = lib.mkDefault true;
-    dates = lib.mkDefault "weekly";
-    options = lib.mkDefault "--delete-older-than 7d";
-  };
-
   time.timeZone = "Europe/Berlin";
 
   # Select internationalisation properties.
@@ -20,11 +14,26 @@
   i18n.supportedLocales = ["all"];
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      brlaser # Open-Source Brother Treiber
+      # oder:
+      # brgenml1lpr
+      # brgenml1cupswrapper
+    ];
+  };
+
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+  };
 
   services.pipewire = {
     enable = true;
     pulse.enable = true;
+    jack.enable = true;
+    wireplumber.enable = true;
   };
 
   users.users.xsnilzx = {
@@ -38,42 +47,65 @@
 
   environment.systemPackages = with pkgs;
     [
-      vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+      vim
       wget
       kdePackages.partitionmanager
-      prismlauncher
-      lmstudio
       nh
       exfatprogs
+      easyeffects
+      wireguard-tools
     ]
-    ++ lib.optionals (machine == "nixspo") [
-      quickshell
-      qt6.qtimageformats
-      qt6.qtmultimedia
-      qt6.qt5compat
+    ++ lib.optionals (machine == "nixhael") [
+      gamescope
     ];
 
   fonts = {
+    enableDefaultPackages = true;
     fontconfig.enable = true;
     packages = with pkgs; [
       nerd-fonts.jetbrains-mono
       nerd-fonts.symbols-only
       font-awesome
       libertine
+      corefonts
     ];
   };
 
   services.power-profiles-daemon.enable = true;
 
-  nix.settings = {
-    download-buffer-size = 134217728; # 128 MiB
-    experimental-features = ["nix-command" "flakes"];
-    trusted-substituters = [
-      "https://cache.flox.dev"
-    ];
-    trusted-public-keys = [
-      "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXtjlu/UaAZnotSH+zGeSHs="
-    ];
+  nix = {
+    settings = {
+      experimental-features = ["nix-command" "flakes"];
+
+      max-jobs = "auto";
+      cores = 0;
+
+      download-buffer-size = 268435456; # 256 MiB
+
+      keep-outputs = true;
+      keep-derivations = true;
+
+      auto-optimise-store = true;
+      sandbox = true;
+
+      warn-dirty = false;
+      builders-use-substitutes = true;
+
+      substituters = ["https://cache.garnix.io"];
+
+      trusted-substituters = [
+        "https://cache.flox.dev"
+      ];
+      trusted-public-keys = [
+        "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXtjlu/UaAZnotSH+zGeSHs="
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+      ];
+    };
+    gc = {
+      automatic = lib.mkDefault true;
+      dates = lib.mkDefault "weekly";
+      options = lib.mkDefault "--delete-older-than 7d";
+    };
   };
 
   programs.direnv = {
@@ -94,12 +126,21 @@
 
   programs.zsh.enable = true;
 
+  programs.niri.enable = lib.mkIf (compositor == "niri") true;
+  security.polkit.enable = lib.mkIf (compositor == "niri") true; # polkit
+  services.gnome.gnome-keyring.enable = lib.mkIf (compositor == "niri") true; # secret service
+  security.pam.services.swaylock = lib.mkIf (compositor == "niri") {};
+
   # Steam
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+    ];
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
@@ -107,5 +148,5 @@
   # accidentally delete configuration.nix.
   # system.copySystemConfiguration = true;
 
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.05";
 }

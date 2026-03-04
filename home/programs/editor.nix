@@ -71,6 +71,14 @@
           name = "java";
           language-servers = ["jdtls"];
         }
+        {
+          name = "nix";
+          auto-format = true;
+          language-servers = ["nixd"];
+          formatter = {
+            command = "${pkgs.alejandra}/bin/alejandra";
+          };
+        }
       ];
       language-server = {
         clangd = {
@@ -100,7 +108,10 @@
           command = "rust-analyzer";
         };
         tinymist = {
-          command = "tinymist";
+          command = "${pkgs.tinymist}/bin/tinymist";
+        };
+        nixd = {
+          command = "${pkgs.nixd}/bin/nixd";
         };
       };
     };
@@ -135,6 +146,7 @@
           "editor.formatOnSave" = true;
           "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
           "git.autofetch" = true;
+          "git.confirmSync" = false;
           "window.newWindowProfile" = "Default";
         };
       };
@@ -155,6 +167,7 @@
           "workbench.iconTheme" = "material-icon-theme";
           "editor.formatOnSave" = true;
           "git.autofetch" = true;
+          "git.confirmSync" = false;
         };
       };
       "Nix-OS" = {
@@ -178,10 +191,11 @@
           "editor.formatOnSave" = true;
           "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
           "git.autofetch" = true;
+          "git.confirmSync" = false;
         };
       };
 
-      "iits-1" = {
+      "Java" = {
         extensions = with pkgs.vscode-extensions;
           [
             pkief.material-icon-theme
@@ -189,12 +203,9 @@
             continue.continue
             tomoki1207.pdf
             redhat.java
-            vscjava.vscode-gradle
-            vscjava.vscode-maven
           ]
           ++ (with pkgs.vscode-marketplace; [
             # Extensions, die nicht in den offiziellen pkgs sind, kommen hier rein:
-            vmware.vscode-spring-boot
           ]);
 
         # Extensions aktivieren
@@ -203,6 +214,95 @@
           "editor.formatOnSave" = false;
           "redhat.telemetry.enabled" = false;
           "git.autofetch" = true;
+          "git.confirmSync" = false;
+        };
+      };
+
+      "Typst" = {
+        extensions = with pkgs.vscode-extensions; [
+          pkief.material-icon-theme
+          esbenp.prettier-vscode
+          continue.continue
+          tomoki1207.pdf
+          myriad-dreamin.tinymist
+        ];
+
+        userSettings = {
+          "workbench.iconTheme" = "material-icon-theme";
+          "editor.formatOnSave" = true;
+          "git.autofetch" = true;
+          "git.confirmSync" = false;
+        };
+      };
+
+      "Quickshell" = {
+        extensions = with pkgs.vscode-extensions;
+          [
+            pkief.material-icon-theme
+            esbenp.prettier-vscode
+            continue.continue
+            tomoki1207.pdf
+          ]
+          ++ (with pkgs.vscode-marketplace; [
+            # Extensions, die nicht in den offiziellen pkgs sind, kommen hier rein:
+            theqtcompany.qt-qml
+            theqtcompany.qt-core
+          ]);
+        userSettings = {
+          "workbench.iconTheme" = "material-icon-theme";
+          "editor.formatOnSave" = true;
+          "git.autofetch" = true;
+          "git.confirmSync" = false;
+          "workbench.editorAssociations" = {
+            "{git,gitlens,chat-editing-snapshot-text-model,copilot,git-graph,git-graph-3}:/**/*.qrc" = "default";
+            "*.qrc" = "qt-core.qrcEditor";
+          };
+          "qt-qml.doNotAskForQmllsDownload" = true;
+        };
+      };
+
+      "Rust" = {
+        extensions = with pkgs.vscode-extensions; [
+          pkief.material-icon-theme
+          esbenp.prettier-vscode
+          continue.continue
+          tomoki1207.pdf
+          # Rust stuff
+          rust-lang.rust-analyzer
+          fill-labs.dependi
+          tamasfe.even-better-toml
+        ];
+
+        userSettings = {
+          "workbench.iconTheme" = "material-icon-theme";
+          "editor.formatOnSave" = true;
+          "git.autofetch" = true;
+          "git.confirmSync" = false;
+          "telemetry.telemetryLevel" = "off";
+        };
+      };
+
+      "Go" = {
+        extensions = with pkgs.vscode-extensions; [
+          pkief.material-icon-theme
+          esbenp.prettier-vscode
+          continue.continue
+          golang.go
+          usernamehw.errorlens
+        ];
+
+        userSettings = {
+          "workbench.iconTheme" = "material-icon-theme";
+          "editor.formatOnSave" = true;
+          "git.autofetch" = true;
+          "git.confirmSync" = false;
+          "go.useLanguageServer" = true;
+          "go.lintTool" = "golangci-lint";
+          "go.formatTool" = "goimports";
+          "gopls" = {
+            "ui.semanticTokens" = true;
+            "formatting.gofumpt" = true;
+          };
         };
       };
     };
@@ -210,14 +310,45 @@
 
   programs.zed-editor = {
     enable = true;
-    extensions = ["nix" "dracula" "typst" "java" "toml"];
+    extensions = ["nix" "typst" "java" "toml"];
     userSettings = {
-      "auto_update" = false;
+      auto_update = false;
+
+      assistant = {
+        enabled = true;
+        provider = "openai";
+      };
+
       telemetry = {
         diagnostic = false;
         metrics = false;
       };
-      "theme" = "Dracula";
+
+      format_on_save = true;
+      git.auto_fetch = true;
+
+      languages = {
+        Java.lsp.command = "jdtls";
+
+        JavaScript = {
+          formatter = "prettier";
+        };
+
+        Nix = {
+          formatter = {
+            external = {
+              command = "${pkgs.alejandra}/bin/alejandra";
+              arguments = ["-"];
+            };
+          };
+        };
+
+        Python.formatter = "black";
+
+        TypeScript = {
+          formatter = "prettier";
+        };
+      };
     };
   };
 }
