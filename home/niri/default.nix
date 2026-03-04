@@ -10,7 +10,7 @@
     ./keybinds.nix
     ./autostart.nix
     ./scripts.nix
-    ./quickshell.nix
+    #./quickshell.nix
     ../hyprland/anyrun.nix
     ../hyprland/swaync.nix
     #../hyprland/waybar.nix
