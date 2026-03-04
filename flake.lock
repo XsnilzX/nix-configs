@@ -661,6 +661,49 @@
         "type": "github"
       }
     },
+    "noctalia": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "noctalia-qs": [
+          "noctalia-qs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1772624996,
+        "narHash": "sha256-aP0587epeG8kCMJbyZscRNcj1J8DIHq1BVGlfJKXUO8=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "rev": "0a7e81c345a9aa20d41084dda69b31a1fba987ef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "noctalia-shell",
+        "type": "github"
+      }
+    },
+    "noctalia-qs": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1772556237,
+        "narHash": "sha256-SRB80oNiuV2WC63iSWlanc+Dl3SMhs+46Af9wdCMf8o=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia-qs",
+        "rev": "3455d5f266a95c5414da3fcd6dabcf266d1f9487",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "noctalia-qs",
+        "type": "github"
+      }
+    },
     "nur": {
       "inputs": {
         "flake-parts": [
@@ -719,6 +762,8 @@
         "nix-cachyos-kernel": "nix-cachyos-kernel",
         "nix-vscode-extensions": "nix-vscode-extensions",
         "nixpkgs": "nixpkgs_5",
+        "noctalia": "noctalia",
+        "noctalia-qs": "noctalia-qs",
         "sops-nix": "sops-nix",
         "stylix": "stylix",
         "zen-browser": "zen-browser"
