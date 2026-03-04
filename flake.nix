@@ -44,10 +44,6 @@
   }: let
     myOverlay = final: prev: {
       helium = inputs.helium.packages.${prev.stdenv.hostPlatform.system}.default;
-      ly = prev.ly.overrideAttrs (old: {
-        postPatch = "";
-        postConfigure = (old.postConfigure or "") + "\n" + (old.postPatch or "");
-      });
     };
   in {
     nixosConfigurations = {
