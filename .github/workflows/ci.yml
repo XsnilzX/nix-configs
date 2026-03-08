@@ -1,0 +1,73 @@
+name: ci
+
+on:
+  push:
+    paths-ignore:
+      - "README.md"
+      - "docs/**"
+      - ".gitignore"
+      - "LICENSE"
+  pull_request:
+    paths-ignore:
+      - "README.md"
+      - "docs/**"
+      - ".gitignore"
+      - "LICENSE"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run flake checks
+        run: nix flake check
+
+      - name: Check formatting
+        run: nix run nixpkgs#alejandra -- --check .
+
+      - name: Run statix
+        run: nix run nixpkgs#statix -- check .
+
+      - name: Run deadnix
+        run: nix run nixpkgs#deadnix -- .
+
+  build-hosts:
+    runs-on: ubuntu-latest
+    needs: checks
+    timeout-minutes: 45
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    strategy:
+      fail-fast: false
+      matrix:
+        host:
+          - nixspo
+          - nixhael
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build NixOS configuration for ${{ matrix.host }}
+        run: |
+          nix build \
+            .#nixosConfigurations.${{ matrix.host }}.config.system.build.toplevel
