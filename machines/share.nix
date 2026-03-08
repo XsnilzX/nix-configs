@@ -13,27 +13,31 @@
   i18n.defaultLocale = "de_DE.UTF-8";
   i18n.supportedLocales = ["all"];
 
-  # Enable CUPS to print documents.
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [
-      brlaser # Open-Source Brother Treiber
-      # oder:
-      # brgenml1lpr
-      # brgenml1cupswrapper
-    ];
-  };
+  services = {
+    # Enable CUPS to print documents.
+    printing = {
+      enable = true;
+      drivers = with pkgs; [
+        brlaser # Open-Source Brother Treiber
+        # oder:
+        # brgenml1lpr
+        # brgenml1cupswrapper
+      ];
+    };
 
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-  };
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+    };
 
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    jack.enable = true;
-    wireplumber.enable = true;
+    pipewire = {
+      enable = true;
+      pulse.enable = true;
+      jack.enable = true;
+      wireplumber.enable = true;
+    };
+
+    power-profiles-daemon.enable = true;
   };
 
   users.users.xsnilzx = {
@@ -71,10 +75,6 @@
     ];
   };
 
-  programs.gamemode.enable = true;
-
-  services.power-profiles-daemon.enable = true;
-
   nix = {
     settings = {
       experimental-features = ["nix-command" "flakes"];
@@ -110,39 +110,46 @@
     };
   };
 
-  programs.direnv = {
-    enable = true;
-    enableZshIntegration = true;
-    nix-direnv.enable = true;
+  programs = {
+    gamemode.enable = true;
+
+    direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
+
+    zsh.enable = true;
+
+    niri.enable = lib.mkIf (compositor == "niri") true;
+
+    gnome.gnome-keyring.enable = lib.mkIf (compositor == "niri") true; # secret service
+
+    # Steam
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
+      ];
+    };
   };
 
   virtualisation.docker.enable = true;
 
   # sudo-rs
-  security.sudo-rs = {
-    enable = true;
-    wheelNeedsPassword = true;
-  };
+  security = {
+    sudo-rs = {
+      enable = true;
+      wheelNeedsPassword = true;
+    };
 
-  #nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    polkit.enable = lib.mkIf (compositor == "niri") true; # polkit
 
-  programs.zsh.enable = true;
-
-  programs.niri.enable = lib.mkIf (compositor == "niri") true;
-  security.polkit.enable = lib.mkIf (compositor == "niri") true; # polkit
-  services.gnome.gnome-keyring.enable = lib.mkIf (compositor == "niri") true; # secret service
-  security.pam.services.swaylock = lib.mkIf (compositor == "niri") {};
-
-  # Steam
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
-
-    extraCompatPackages = with pkgs; [
-      proton-ge-bin
-    ];
+    pam.services.swaylock = lib.mkIf (compositor == "niri") {};
   };
 
   # Copy the NixOS configuration file and link it from the resulting system

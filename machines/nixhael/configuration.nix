@@ -11,18 +11,20 @@
     ./../../modules/sops/nixhael.nix
   ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
 
-  boot.kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-zen4;
+    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-zen4;
 
-  boot.kernelParams = [
-    "amd_pstate=active"
-  ];
+    kernelParams = [
+      "amd_pstate=active"
+    ];
 
-  boot.kernel.sysctl = {
-    "vm.swappiness" = 10;
-    "kernel.sched_autogroup_enabled" = 1;
+    kernel.sysctl = {
+      "vm.swappiness" = 10;
+      "kernel.sched_autogroup_enabled" = 1;
+    };
   };
 
   powerManagement.cpuFreqGovernor = "performance";
