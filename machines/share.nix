@@ -38,6 +38,7 @@
     };
 
     power-profiles-daemon.enable = true;
+    gnome.gnome-keyring.enable = lib.mkIf (compositor == "niri") true; # secret service
   };
 
   users.users.xsnilzx = {
@@ -122,8 +123,6 @@
     zsh.enable = true;
 
     niri.enable = lib.mkIf (compositor == "niri") true;
-
-    gnome.gnome-keyring.enable = lib.mkIf (compositor == "niri") true; # secret service
 
     # Steam
     steam = {
