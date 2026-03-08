@@ -66,64 +66,66 @@
       )
     '';
 
-    extraConfigFiles."symbols.ron".text = ''
-      // <Anyrun config dir>/symbols.ron
-      Config(
-        // The prefix that the search needs to begin with to yield symbol results
-        prefix: "",
-        // Custom user defined symbols to be included along the unicode symbols
-        symbols: {
-          // "name": "text to be copied"
-          "shrug": "¯\\_(ツ)_/¯",
-        },
-        max_entries: 4,
-      )
-    '';
+    extraConfigFiles = {
+      "symbols.ron".text = ''
+        // <Anyrun config dir>/symbols.ron
+        Config(
+          // The prefix that the search needs to begin with to yield symbol results
+          prefix: "",
+          // Custom user defined symbols to be included along the unicode symbols
+          symbols: {
+            // "name": "text to be copied"
+            "shrug": "¯\\_(ツ)_/¯",
+          },
+          max_entries: 4,
+        )
+      '';
 
-    extraConfigFiles."translate.ron".text = ''
-      // <Anyrun config dir>/translate.ron
-      Config(
-        prefix: ":",
-        language_delimiter: ">",
-        max_entries: 3,
-      )
-    '';
+      "translate.ron".text = ''
+        // <Anyrun config dir>/translate.ron
+        Config(
+          prefix: ":",
+          language_delimiter: ">",
+          max_entries: 3,
+        )
+      '';
 
-    extraConfigFiles."shell.ron".text = ''
-      // <Anyrun config dir>/shell.ron
-      Config(
-        prefix: ":sh",
-        // Override the shell used to launch the command
-        shell: None,
-      )
-    '';
+      "shell.ron".text = ''
+        // <Anyrun config dir>/shell.ron
+        Config(
+          prefix: ":sh",
+          // Override the shell used to launch the command
+          shell: None,
+        )
+      '';
 
-    extraConfigFiles."websearch.ron".text = ''
-      Config(
-        prefix: "?",
-        // Options: Google, Ecosia, Bing, DuckDuckGo, Custom
-        //
-        // Custom engines can be defined as such:
-        // Custom(
-        //   name: "Searx",
-        //   url: "searx.be/?q={}",
-        // )
-        //
-        // NOTE: `{}` is replaced by the search query and `https://` is automatically added in front.
-        engines: [DuckDuckGo]
-      )
-    '';
+      "websearch.ron".text = ''
+        Config(
+          prefix: "?",
+          // Options: Google, Ecosia, Bing, DuckDuckGo, Custom
+          //
+          // Custom engines can be defined as such:
+          // Custom(
+          //   name: "Searx",
+          //   url: "searx.be/?q={}",
+          // )
+          //
+          // NOTE: `{}` is replaced by the search query and `https://` is automatically added in front.
+          engines: [DuckDuckGo]
+        )
+      '';
 
-    extraConfigFiles."nix-run.ron".text = ''
-      // <Anyrun config dir>/nix-run.ron
-      Config(
-        prefix: ":nr ",
-        // Whether or not to allow unfree packages
-        allow_unfree: true,
-        // Nixpkgs channel to get the package list from
-        channel: "nixpkgs-unstable",
-        max_entries: 4,
-      )
-    '';
+      "nix-run.ron".text = ''
+        // <Anyrun config dir>/nix-run.ron
+        Config(
+          prefix: ":nr ",
+          // Whether or not to allow unfree packages
+          allow_unfree: true,
+          // Nixpkgs channel to get the package list from
+          channel: "nixpkgs-unstable",
+          max_entries: 4,
+        )
+      '';
+    };
   };
 }
