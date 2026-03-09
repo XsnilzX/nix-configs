@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{config, ...}: let
   tTeleSecPem = builtins.fetchurl {
     url = "https://corporate-pki.telekom.de/crt/GlobalRoot_Class_2.crt";
     sha256 = "0li50lbin11y2h5vr625076wm3laakhpswsqpakyn42qimwgbqli";

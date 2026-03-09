@@ -48,7 +48,6 @@
     sops-nix,
     stylix,
     my-quickshell,
-    niri,
     ...
   }: let
     myOverlay = final: prev: {

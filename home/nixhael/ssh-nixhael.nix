@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{config, ...}: let
   sshPath = "${config.home.homeDirectory}/.ssh";
 in {
   programs.ssh = {

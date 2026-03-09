@@ -4,7 +4,6 @@
   machine,
   compositor,
   config,
-  pkgs,
   ...
 }: {
   home = {
