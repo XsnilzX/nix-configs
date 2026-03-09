@@ -1,4 +1,4 @@
-{...}: {
+{
   programs = {
     btop.enable = true;
     eza.enable = true;

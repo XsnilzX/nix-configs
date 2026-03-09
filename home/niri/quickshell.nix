@@ -1,4 +1,4 @@
-{...}: {
+{
   programs.myQuickshell = {
     enable = true;
     autoStart = true;

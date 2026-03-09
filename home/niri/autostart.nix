@@ -1,4 +1,4 @@
-{...}: {
+{
   programs.niri.settings.spawn-at-startup = [
     {command = ["swayidle"];}
     {command = ["swaync"];}
