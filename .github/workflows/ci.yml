@@ -48,9 +48,9 @@ jobs:
         run: nix run nixpkgs#deadnix -- .
 
   build-hosts:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux]
     needs: checks
-    timeout-minutes: 90
+    timeout-minutes: 180
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
 
     strategy:
