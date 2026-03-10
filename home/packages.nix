@@ -1,6 +1,5 @@
 {
   pkgs,
-  inputs,
   lib,
   machine,
   compositor,
@@ -64,7 +63,6 @@ in {
       python313
 
       # Nix tools
-      inputs.flox.packages.${pkgs.stdenv.hostPlatform.system}.default
       devbox
       direnv
       nix-direnv
