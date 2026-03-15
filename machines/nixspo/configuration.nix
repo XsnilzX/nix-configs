@@ -31,8 +31,6 @@
   networking.hostName = "nixspo";
   networking.networkmanager.enable = true;
 
-  hardware.bluetooth.enable = true;
-
   services = {
     udisks2.enable = true;
     openssh.enable = true;

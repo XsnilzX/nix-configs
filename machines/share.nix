@@ -138,6 +138,8 @@
 
   virtualisation.docker.enable = true;
 
+  hardware.bluetooth.enable = true;
+
   # sudo-rs
   security = {
     sudo-rs = {
