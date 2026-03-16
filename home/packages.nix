@@ -42,6 +42,7 @@ in {
       gimp
       qbittorrent
       protonvpn-gui
+      geogebra6
 
       # Chatting
       element-desktop
