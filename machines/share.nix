@@ -28,6 +28,8 @@
       nssmdns4 = true;
     };
 
+    mullvad-vpn.enable = true;
+
     pipewire = {
       enable = true;
       pulse.enable = true;
