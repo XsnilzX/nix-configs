@@ -41,8 +41,11 @@ in {
       bat
       gimp
       qbittorrent
-      protonvpn-gui
       geogebra6
+
+      # VPN
+      mullvad-vpn
+      protonvpn-gui
 
       # Chatting
       element-desktop
