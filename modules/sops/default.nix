@@ -1,6 +1,13 @@
-{config, ...}: {
+{machine, ...}: {
   sops = {
-    age.keyFile = "/var/lib/sops-nix/key.txt";
+    age.sshKeyPaths =
+      if machine == "nixhael"
+      then ["/etc/ssh/ssh_host_ed25519_key"]
+      else [];
+    age.keyFile =
+      if machine != "nixhael"
+      then "/var/lib/sops-nix/key.txt"
+      else null;
     # Hier können gemeinsame Einstellungen rein
 
     /*

@@ -1,8 +1,6 @@
 {
-  config,
   lib,
   pkgs,
-  inputs,
   machine,
   compositor,
   ...
@@ -29,6 +27,8 @@
       enable = true;
       nssmdns4 = true;
     };
+
+    mullvad-vpn.enable = true;
 
     pipewire = {
       enable = true;
@@ -101,11 +101,14 @@
       ];
 
       trusted-substituters = [
-        "https://cache.flox.dev"
+        "https://attic.xuyh0120.win/lantian"
+        "https://cache.nixos.org/"
+        "https://xsnilzx.cachix.org"
       ];
+
       trusted-public-keys = [
-        "flox-cache-public-1:7F4OyH7ZCnFhcze3fJdfyXtjlu/UaAZnotSH+zGeSHs="
         "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
+        "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
         "xsnilzx.cachix.org-1:Sxn4bw0QwjTLqFcK5esmKsXR3NDPi1Wr2ZhOiGcJDjc="
       ];
     };
@@ -143,6 +146,8 @@
   };
 
   virtualisation.docker.enable = true;
+
+  hardware.bluetooth.enable = true;
 
   # sudo-rs
   security = {

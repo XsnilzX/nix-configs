@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ./../share.nix
@@ -51,6 +45,16 @@
   };
 
   services = {
+    openssh = {
+      enable = true;
+      settings = {
+        PermitRootLogin = "no";
+        PasswordAuthentication = true;
+        KbdInteractiveAuthentication = false;
+        X11Forwarding = false;
+      };
+    };
+
     desktopManager.plasma6.enable = true;
 
     displayManager.sddm.enable = true;

@@ -4,7 +4,6 @@
   machine,
   compositor,
   config,
-  pkgs,
   ...
 }: {
   home = {
@@ -52,8 +51,8 @@
     };
   };
 
-  services.ollama = {
-    enable = true;
-    acceleration = "rocm";
-  };
+  # services.ollama = {
+  #   enable = true;
+  #   acceleration = "rocm";
+  # };
 }

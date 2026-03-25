@@ -1,9 +1,4 @@
 {
-  lib,
-  pkgs,
-  machine,
-  ...
-}: {
   programs = {
     btop.enable = true;
     eza.enable = true;

@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{config, ...}: let
   scriptPath = "${config.home.homeDirectory}/.config/hypr/scripts/wallpaper-cycle.sh";
 in {
   # Script ins Home schreiben

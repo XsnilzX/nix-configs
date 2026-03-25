@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  inputs,
   lib,
   machine,
   compositor,
@@ -43,11 +41,16 @@ in {
       bat
       gimp
       qbittorrent
+      geogebra6
+
+      # VPN
+      mullvad-vpn
       protonvpn-gui
 
       # Chatting
       element-desktop
       discord
+      mumble
 
       prismlauncher
       lunar-client
@@ -65,7 +68,6 @@ in {
       python313
 
       # Nix tools
-      inputs.flox.packages.${pkgs.stdenv.hostPlatform.system}.default
       devbox
       direnv
       nix-direnv
