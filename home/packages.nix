@@ -50,6 +50,7 @@ in {
       # Chatting
       element-desktop
       discord
+      mumble
 
       prismlauncher
       lunar-client
