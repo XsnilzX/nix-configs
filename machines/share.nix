@@ -95,12 +95,19 @@
       builders-use-substitutes = true;
 
       substituters = [
+        "https://cache.garnix.io"
+        "https://cache.nixos.org/"
+        "https://xsnilzx.cachix.org"
+      ];
+
+      trusted-substituters = [
         "https://attic.xuyh0120.win/lantian"
         "https://cache.nixos.org/"
         "https://xsnilzx.cachix.org"
       ];
 
       trusted-public-keys = [
+        "cache.garnix.io:CTFPyKSLcx5RMJKfLo5EEPUObbA78b0YQ2DTCJXqr9g="
         "lantian:EeAUQ+W+6r7EtwnmYjeVwx5kOGEBpjlBfPlzGlTNvHc="
         "xsnilzx.cachix.org-1:Sxn4bw0QwjTLqFcK5esmKsXR3NDPi1Wr2ZhOiGcJDjc="
       ];
