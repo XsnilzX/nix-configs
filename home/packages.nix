@@ -45,7 +45,7 @@ in {
 
       # VPN
       mullvad-vpn
-      protonvpn-gui
+      proton-vpn
 
       # Chatting
       element-desktop
