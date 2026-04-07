@@ -23,7 +23,11 @@
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
 
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.cachyosKernels.linuxPackages-cachyos-latest-zen4;
+
+    kernelParams = [
+      "amd_pstate=active"
+    ];
   };
 
   nixpkgs.config.allowUnfree = true;
