@@ -27,8 +27,7 @@ in {
 
   config = lib.mkIf (cfg.enable && cfg.modules.clock.enable) {
     programs.waybar.settings.mainBar.clock = {
-      format = cfg.modules.clock.format;
-      interval = cfg.modules.clock.interval;
+      inherit (cfg.modules.clock) format interval;
       tooltip = false;
     };
   };

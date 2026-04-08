@@ -39,7 +39,7 @@ in {
     programs.waybar.settings.mainBar = lib.mkMerge [
       (lib.mkIf cfg.modules.hyprland.workspaces.enable {
         "hyprland/workspaces" = {
-          format = cfg.modules.hyprland.workspaces.format;
+          inherit (cfg.modules.hyprland.workspaces) format;
           on-click = "activate";
           sort-by-number = true;
         };
@@ -47,7 +47,7 @@ in {
 
       (lib.mkIf cfg.modules.hyprland.window.enable {
         "hyprland/window" = {
-          max-length = cfg.modules.hyprland.window.max-length;
+          inherit (cfg.modules.hyprland.window) max-length;
           separate-outputs = true;
         };
       })

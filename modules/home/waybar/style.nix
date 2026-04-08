@@ -43,7 +43,7 @@
   font =
     if stylixEnabled
     then {
-      name = config.stylix.fonts.sansSerif.name;
+      inherit (config.stylix.fonts.sansSerif) name;
       size = config.stylix.fonts.sizes.popups;
     }
     else {

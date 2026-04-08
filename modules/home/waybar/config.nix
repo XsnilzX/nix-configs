@@ -84,8 +84,7 @@ in {
         {
           layer = "top";
           position = "top";
-          height = cfg.settings.height;
-          spacing = cfg.settings.spacing;
+          inherit (cfg.settings) height spacing;
 
           modules-left = currentModules.left;
           modules-center = currentModules.center;
