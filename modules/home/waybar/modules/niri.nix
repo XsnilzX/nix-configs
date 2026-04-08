@@ -46,7 +46,7 @@ in {
       enable =
         lib.mkEnableOption "niri screenshot picker"
         // {
-          default = isNiri;
+          default = false;
         };
 
       format = lib.mkOption {

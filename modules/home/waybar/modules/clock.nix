@@ -14,7 +14,7 @@ in {
 
     format = lib.mkOption {
       type = lib.types.str;
-      default = "{:%Y-%m-%d %H:%M}";
+      default = " {:%H:%M}";
       description = "Clock format string";
     };
 
@@ -29,6 +29,7 @@ in {
     programs.waybar.settings.mainBar.clock = {
       format = cfg.modules.clock.format;
       interval = cfg.modules.clock.interval;
+      tooltip = false;
     };
   };
 }

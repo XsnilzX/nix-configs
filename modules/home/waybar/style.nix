@@ -54,93 +54,104 @@
   borderRadius =
     if stylixEnabled
     then config.stylix.roundness or 0
-    else 0;
+    else 16;
+
+  popupOpacity =
+    if stylixEnabled
+    then config.stylix.opacity.popups or 0.85
+    else 0.85;
 in {
   config = lib.mkIf cfg.enable {
     programs.waybar.style = ''
       * {
+        border: none;
+        border-radius: 0;
         font-family: "${font.name}", sans-serif;
         font-size: ${toString font.size}px;
         min-height: 0;
+        color: #${colors.fg};
       }
 
       window#waybar {
-        background-color: #${colors.bg};
-        color: #${colors.fg};
+        background: transparent;
+      }
+
+      .modules-left,
+      .modules-center,
+      .modules-right {
+        background: rgba(${hexToRgb colors.bg}, ${toString popupOpacity});
+        padding: 2px 6px;
+        margin: 2px 4.5px;
         border-radius: ${toString borderRadius}px;
       }
 
-      ${lib.optionalString stylixEnabled ''
-        window#waybar {
-          background-color: rgba(${hexToRgb colors.bg}, ${toString (config.stylix.opacity.popups or 1.0)});
-        }
-      ''}
-
       #workspaces button {
-        padding: 0 10px;
+        padding: 0 8px;
         color: #${colors.fg};
+        background: transparent;
         border-radius: ${toString borderRadius}px;
       }
 
       #workspaces button:hover {
-        background: #${colors.accent};
-        color: #${colors.bg};
+        background: rgba(${hexToRgb colors.accent}, 0.2);
+        color: #${colors.fg};
       }
 
       #workspaces button.focused,
       #workspaces button.active {
-        background-color: #${colors.accent};
+        background: #${colors.accent};
         color: #${colors.bg};
       }
 
       #workspaces button.urgent {
-        background-color: #${colors.urgent};
+        background: #${colors.urgent};
+        color: #${colors.bg};
       }
 
       #clock,
-      #battery,
-      #network,
-      #tray,
       #cpu,
       #memory,
-      #disk,
-      #temperature,
+      #battery,
       #backlight,
       #pulseaudio,
-      #custom-media {
-        padding: 0 12px;
-        margin: 4px 2px;
-        color: #${colors.fg};
-        background-color: #${colors.bg-alt};
-        border-radius: ${toString borderRadius}px;
+      #power-profiles-daemon,
+      #custom-notification {
+        padding: 0 6px;
       }
 
-      #clock {
-        background-color: #${colors.accent};
-        color: #${colors.bg};
+      #clock,
+      #tray,
+      #custom-exit {
+        padding: 0 4px;
       }
 
-      #battery.critical,
-      #temperature.critical {
-        background-color: #${colors.urgent};
-        color: #${colors.bg};
+      #custom-separator {
+        color: #${colors.fg-alt};
+        font-size: ${toString (font.size + 4)}px;
       }
 
-      #battery.warning,
-      #temperature.warning {
-        background-color: #${colors.warning};
-        color: #${colors.bg};
+      #custom-exit {
+        font-family: "Font Awesome 6 Free", "${font.name}", sans-serif;
+        color: #${colors.urgent};
       }
 
       #battery.charging {
-        background-color: #${colors.success};
-        color: #${colors.bg};
+        color: #${colors.success};
+      }
+
+      #battery.warning {
+        color: #${colors.warning};
+      }
+
+      #battery.critical {
+        color: #${colors.urgent};
       }
 
       tooltip {
-        background-color: #${colors.bg};
-        border: 1px solid #${colors.accent};
-        border-radius: ${toString borderRadius}px;
+        background: #${colors.bg};
+        border-radius: ${toString (borderRadius / 2)}px;
+        padding: 8px;
+        opacity: 0.9;
       }
 
       tooltip label {

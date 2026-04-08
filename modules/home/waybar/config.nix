@@ -8,55 +8,70 @@
 
   compositorModules = {
     hyprland = {
-      left = [
-        "hyprland/workspaces"
-        "hyprland/window"
-      ];
+      left = ["hyprland/workspaces"];
       center = ["clock"];
       right = [
-        "network"
+        "cpu"
+        "memory"
         "battery"
+        "backlight"
+        "pulseaudio"
+        "power-profiles-daemon"
+        "custom/notification"
+        "custom/separator"
         "tray"
+        "custom/exit"
       ];
     };
 
     niri = {
-      left = [
-        "niri/workspaces"
-        "niri/window"
-      ];
+      left = ["niri/workspaces"];
       center = ["clock"];
       right = [
-        "network"
+        "cpu"
+        "memory"
         "battery"
+        "backlight"
+        "pulseaudio"
+        "power-profiles-daemon"
+        "custom/notification"
+        "custom/separator"
         "tray"
-        "custom/niri-picker"
+        "custom/exit"
       ];
     };
 
     sway = {
-      left = [
-        "sway/workspaces"
-        "sway/window"
-      ];
+      left = ["sway/workspaces"];
       center = ["clock"];
       right = [
-        "network"
+        "cpu"
+        "memory"
         "battery"
+        "backlight"
+        "pulseaudio"
+        "power-profiles-daemon"
+        "custom/notification"
+        "custom/separator"
         "tray"
+        "custom/exit"
       ];
     };
 
     river = {
-      left = [
-        "river/tags"
-        "river/window"
-      ];
+      left = ["river/tags"];
       center = ["clock"];
       right = [
-        "network"
+        "cpu"
+        "memory"
         "battery"
+        "backlight"
+        "pulseaudio"
+        "power-profiles-daemon"
+        "custom/notification"
+        "custom/separator"
         "tray"
+        "custom/exit"
       ];
     };
   };
@@ -77,37 +92,95 @@ in {
           modules-right = currentModules.right;
         }
         // {
-          clock = {
-            tooltip-format = "<big>{:%Y %B}</big>\n<tt>{calendar}</tt>";
+          cpu = {
+            interval = 1;
+            format = "{usage}%";
           };
 
-          network = {
-            format-wifi = "󰤨 {essid}";
-            format-ethernet = "󰈀 {ipaddr}/{cidr}";
-            format-disconnected = "󰤭 Offline";
-            tooltip-format = "{ifname}: {ipaddr}";
+          memory = {
+            interval = 2;
+            format = "{used:0.1f}GB";
           };
 
           battery = {
-            format = "{icon} {capacity}%";
-            format-icons = [
-              "󰁺"
-              "󰁻"
-              "󰁼"
-              "󰁽"
-              "󰁾"
-              "󰁿"
-              "󰂀"
-              "󰂁"
-              "󰂂"
-              "󰁹"
-            ];
-            format-charging = "󰂄 {capacity}%";
-            format-plugged = "󰚥 {capacity}%";
+            format = "{capacity}%";
+            format-charging = "{capacity}%";
+            format-plugged = "{capacity}%";
+          };
+
+          backlight = {
+            format = "{percent}%";
+          };
+
+          pulseaudio = {
+            format = "{volume}% {icon} {format_source}";
+            format-muted = " {format_source}";
+            format-source = "{volume}% ";
+            format-source-muted = "";
+            format-bluetooth = "{volume}% {icon} {format_source}";
+            format-bluetooth-muted = " {icon} {format_source}";
+            format-icons = {
+              default = [
+                ""
+                ""
+                ""
+              ];
+              headphone = "";
+              headset = "";
+              hands-free = "";
+              phone = "";
+              portable = "";
+              car = "";
+            };
+            on-click = "pavucontrol";
+          };
+
+          power-profiles-daemon = {
+            format = "{icon}";
+            tooltip-format = "Power Profile: {icon} {profile}";
+            format-icons = {
+              performance = "";
+              balanced = "";
+              power-saver = "";
+            };
+          };
+
+          "custom/notification" = {
+            tooltip = false;
+            format = "{icon}";
+            format-icons = {
+              notification = "<span foreground='red'><sup></sup></span>";
+              none = "";
+              dnd-notification = "<span foreground='red'><sup></sup></span>";
+              dnd-none = "";
+              inhibited-notification = "<span foreground='red'><sup></sup></span>";
+              inhibited-none = "";
+              dnd-inhibited-notification = "<span foreground='red'><sup></sup></span>";
+              dnd-inhibited-none = "";
+            };
+            return-type = "json";
+            exec-if = "which swaync-client";
+            exec = "swaync-client -swb";
+            on-click = "swaync-client -t -sw";
+            on-click-right = "swaync-client -d -sw";
+            escape = true;
+          };
+
+          "custom/separator" = {
+            format = "|";
+            tooltip = false;
+          };
+
+          "custom/exit" = {
+            format = "⏻";
+            on-click = "wleave";
+            tooltip = false;
           };
 
           tray = {
-            spacing = 10;
+            spacing = 5;
+            icon-size = 18;
+            tooltip = false;
           };
         };
     };
