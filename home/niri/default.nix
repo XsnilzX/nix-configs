@@ -1,6 +1,7 @@
 {inputs, ...}: {
   imports = [
     inputs.niri.homeModules.niri
+    ../../modules/home/waybar
     ./settings.nix
     ./keybinds.nix
     ./autostart.nix
@@ -13,7 +14,10 @@
   ];
 
   programs.swaylock.enable = true;
-  programs.waybar.enable = true;
+  modules.waybar = {
+    enable = true;
+    compositor = "niri";
+  };
   services = {
     mako.enable = true;
     swayidle.enable = true;
