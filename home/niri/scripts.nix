@@ -43,9 +43,9 @@
       exit 0
     fi
 
-    # ---- swww daemon starten falls nötig ----
-    if ! pgrep -x swww-daemon > /dev/null; then
-      ${pkgs.swww}/bin/swww-daemon >/dev/null 2>&1 &
+    # ---- awww daemon starten falls nötig ----
+    if ! pgrep -x awww-daemon > /dev/null; then
+      ${pkgs.awww}/bin/awww-daemon >/dev/null 2>&1 &
       sleep 0.5
     fi
 
@@ -56,7 +56,7 @@
     while read -r OUTPUT; do
       FILE=$(${pkgs.coreutils}/bin/shuf -n 1 "$FILELIST")
 
-      ${pkgs.swww}/bin/swww img "$FILE" \
+      ${pkgs.awww}/bin/awww img "$FILE" \
         --outputs "$OUTPUT" \
         --transition-type fade \
         --transition-duration 1.8 \
@@ -65,7 +65,7 @@
   '';
 in {
   home.packages = with pkgs; [
-    swww
+    awww
     jq
     wallpaperScript
   ];

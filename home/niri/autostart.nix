@@ -2,7 +2,7 @@
   programs.niri.settings.spawn-at-startup = [
     {command = ["swayidle"];}
     {command = ["swaync"];}
-    {command = ["swww-daemon"];}
+    {command = ["awww-daemon"];}
     {command = ["nm-applet" "--indicator"];}
     {command = ["blueman-applet"];}
     {command = ["seafile-applet"];}
