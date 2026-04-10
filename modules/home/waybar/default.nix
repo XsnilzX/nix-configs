@@ -79,7 +79,7 @@ in {
       programs.waybar = {
         enable = true;
         inherit (cfg) package;
-        systemd.enable = false;
+        systemd.enable = true;
       };
     }
 
