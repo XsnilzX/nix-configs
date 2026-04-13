@@ -49,10 +49,43 @@
     my-quickshell,
     ...
   }: let
+    system = "x86_64-linux";
+
     myOverlay = final: prev: {
       helium = inputs.helium.packages.${prev.stdenv.hostPlatform.system}.default;
     };
+
+    pkgs = import nixpkgs {
+      inherit system;
+      config.allowUnfree = true;
+      overlays = [
+        nix-vscode-extensions.overlays.default
+        nix-cachyos-kernel.overlays.pinned
+        myOverlay
+      ];
+    };
   in {
+    devShells.${system}.default = pkgs.mkShell {
+      packages = with pkgs; [
+        zsh
+        alejandra
+        statix
+        deadnix
+        pre-commit
+        git
+        nix
+        opencode
+      ];
+
+      shellHook = ''
+        if [ -z "$IN_NIX_ZSH" ]; then
+          export IN_NIX_ZSH=1
+          export SHELL=${pkgs.zsh}/bin/zsh
+          exec ${pkgs.zsh}/bin/zsh
+        fi
+      '';
+    };
+
     nixosConfigurations = {
       nixhael = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

@@ -6,7 +6,6 @@
   imports = [
     ./ssh-nixspo.nix
     ./stylix.nix
-    ./noctalia.nix
   ];
 
   home.sessionVariables = {
