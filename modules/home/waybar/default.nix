@@ -83,6 +83,12 @@ in {
       };
     }
 
+    (lib.mkIf (cfg.compositor == "niri") {
+      programs.niri.settings.spawn-at-startup = lib.mkAfter [
+        {command = ["systemctl" "--user" "start" "waybar.service"];}
+      ];
+    })
+
     (lib.mkIf cfg.stylix.enable {
       stylix.targets.waybar.enable = false;
     })
