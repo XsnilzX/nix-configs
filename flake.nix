@@ -74,6 +74,7 @@
         pre-commit
         git
         nix
+        opencode
       ];
 
       shellHook = ''
