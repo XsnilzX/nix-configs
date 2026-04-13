@@ -63,6 +63,20 @@
       mode = "0600";
     };
 
+    "luh-vpn-env" = {
+      sopsFile = ../../secrets/nixspo.yaml;
+      owner = "root";
+      group = "root";
+      mode = "0400";
+    };
+
+    "luh-vpn-password" = {
+      sopsFile = ../../secrets/nixspo.yaml;
+      owner = "root";
+      group = "root";
+      mode = "0400";
+    };
+
     # "github_token" = {
     #   sopsFile = ../../secrets/common.yaml;
     #   owner = config.users.users.xsnilzx.name;

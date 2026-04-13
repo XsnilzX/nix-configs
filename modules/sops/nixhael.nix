@@ -51,6 +51,20 @@
       mode = "0600";
     };
 
+    "luh-vpn-env" = {
+      sopsFile = ../../secrets/nixhael.yaml;
+      owner = "root";
+      group = "root";
+      mode = "0400";
+    };
+
+    "luh-vpn-password" = {
+      sopsFile = ../../secrets/nixhael.yaml;
+      owner = "root";
+      group = "root";
+      mode = "0400";
+    };
+
     # Common tokens
     # "github_token" = {
     #   sopsFile = ../../secrets/common.yaml;

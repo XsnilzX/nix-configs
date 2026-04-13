@@ -5,6 +5,10 @@
   compositor,
   ...
 }: {
+  imports = [
+    ../modules/luh-vpn.nix
+  ];
+
   time.timeZone = "Europe/Berlin";
 
   # Select internationalisation properties.
