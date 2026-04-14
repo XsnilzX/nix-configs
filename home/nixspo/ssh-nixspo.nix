@@ -47,15 +47,11 @@ in {
         identityFile = "${sshPath}/huggingface";
         identitiesOnly = true;
       };
-      "swp" = {
-        hostname = "git.se.uni-hannover.de";
-        user = "git";
-        identityFile = "${sshPath}/swp";
+      "sra" = {
+        hostname = "lab.sra.uni-hannover.de";
+        user = "ric.taesler";
+        identityFile = "${sshPath}/sra";
         identitiesOnly = true;
-      };
-      "swp-server" = {
-        hostname = "130.75.33.235";
-        user = "iits-1";
       };
     };
   };
