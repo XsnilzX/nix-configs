@@ -8,7 +8,7 @@ in {
       "git-uni" = {
         hostname = "gitlab.uni-hannover.de";
         user = "git";
-        identityFile = "${sshPath}/gitlab_unihannover";
+        identityFile = "${sshPath}/gitlab_uni";
         identitiesOnly = true;
       };
       "git-finf" = {
