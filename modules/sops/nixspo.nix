@@ -56,10 +56,10 @@
       mode = "0600";
     };
 
-    "ssh_keys/sra/private" = {
+    "ssh_keys/lab/private" = {
       sopsFile = ../../secrets/nixspo.yaml;
       owner = config.users.users.xsnilzx.name;
-      path = "/home/xsnilzx/.ssh/sra";
+      path = "/home/xsnilzx/.ssh/lab";
       mode = "0600";
     };
 

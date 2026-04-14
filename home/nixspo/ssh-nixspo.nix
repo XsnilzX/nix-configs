@@ -47,11 +47,15 @@ in {
         identityFile = "${sshPath}/huggingface";
         identitiesOnly = true;
       };
-      "sra" = {
+      "lab" = {
         hostname = "lab.sra.uni-hannover.de";
         user = "ric.taesler";
-        identityFile = "${sshPath}/sra";
+        identityFile = "${sshPath}/lab";
         identitiesOnly = true;
+      };
+      "lab-pc" = {
+        hostname = "lab-pc02";
+        ProxyJumb = "lab";
       };
     };
   };
