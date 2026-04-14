@@ -55,7 +55,8 @@ in {
       };
       "lab-pc" = {
         hostname = "lab-pc02";
-        ProxyJumb = "lab";
+        user = "ric.taesler";
+        proxyJump = "lab";
       };
     };
   };
