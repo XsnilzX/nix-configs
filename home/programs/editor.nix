@@ -308,6 +308,20 @@
             };
           };
         };
+        "C" = {
+          extensions = with pkgs.vscode-extensions; [
+            pkief.material-icon-theme
+            esbenp.prettier-vscode
+            llvm-vs-code-extensions.vscode-clangd
+          ];
+
+          userSettings = {
+            "workbench.iconTheme" = "material-icon-theme";
+            "editor.formatOnSave" = true;
+            "git.autofetch" = true;
+            "git.confirmSync" = false;
+          };
+        };
       };
     };
 
