@@ -238,32 +238,6 @@
           };
         };
 
-        "Quickshell" = {
-          extensions = with pkgs.vscode-extensions;
-            [
-              pkief.material-icon-theme
-              esbenp.prettier-vscode
-              continue.continue
-              tomoki1207.pdf
-            ]
-            ++ (with pkgs.vscode-marketplace; [
-              # Extensions, die nicht in den offiziellen pkgs sind, kommen hier rein:
-              theqtcompany.qt-qml
-              theqtcompany.qt-core
-            ]);
-          userSettings = {
-            "workbench.iconTheme" = "material-icon-theme";
-            "editor.formatOnSave" = true;
-            "git.autofetch" = true;
-            "git.confirmSync" = false;
-            "workbench.editorAssociations" = {
-              "{git,gitlens,chat-editing-snapshot-text-model,copilot,git-graph,git-graph-3}:/**/*.qrc" = "default";
-              "*.qrc" = "qt-core.qrcEditor";
-            };
-            "qt-qml.doNotAskForQmllsDownload" = true;
-          };
-        };
-
         "Rust" = {
           extensions = with pkgs.vscode-extensions; [
             pkief.material-icon-theme
@@ -308,7 +282,8 @@
             };
           };
         };
-        "C" = {
+
+        "C-C++" = {
           extensions = with pkgs.vscode-extensions; [
             pkief.material-icon-theme
             esbenp.prettier-vscode
