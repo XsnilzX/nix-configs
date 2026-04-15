@@ -44,10 +44,10 @@
       mode = "0600";
     };
 
-    "ssh_keys/swp_key/private" = {
+    "ssh_keys/lab/private" = {
       sopsFile = ../../secrets/nixhael.yaml;
       owner = config.users.users.xsnilzx.name;
-      path = "/home/xsnilzx/.ssh/swp";
+      path = "/home/xsnilzx/.ssh/lab";
       mode = "0600";
     };
 

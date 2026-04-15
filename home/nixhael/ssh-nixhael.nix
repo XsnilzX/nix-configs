@@ -35,11 +35,22 @@ in {
         identityFile = "${sshPath}/biggi";
         identitiesOnly = true;
       };
-      "swp" = {
-        hostname = "git.se.uni-hannover.de";
-        user = "git";
-        identityFile = "${sshPath}/swp";
+      "lab" = {
+        hostname = "lab.sra.uni-hannover.de";
+        user = "ric.taesler";
+        identityFile = "${sshPath}/lab";
         identitiesOnly = true;
+      };
+      "lab-pc" = {
+        hostname = "lab-pc02";
+        user = "ric.taesler";
+        proxyJump = "lab";
+      };
+      "vbs" = {
+        hostname = "praktifix";
+        user = "user";
+        port = 2212;
+        proxyJump = "lab";
       };
     };
   };
