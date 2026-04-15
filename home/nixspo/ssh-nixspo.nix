@@ -58,6 +58,12 @@ in {
         user = "ric.taesler";
         proxyJump = "lab";
       };
+      "vbs" = {
+        hostname = "praktifix";
+        user = "user";
+        port = 2212;
+        proxyJump = "lab";
+      };
     };
   };
 }
