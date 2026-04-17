@@ -74,6 +74,7 @@
         git
         nix
         opencode
+        codex
       ];
     };
 
