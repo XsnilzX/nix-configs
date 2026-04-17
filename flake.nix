@@ -67,7 +67,6 @@
   in {
     devShells.${system}.default = pkgs.mkShell {
       packages = with pkgs; [
-        zsh
         alejandra
         statix
         deadnix
@@ -76,14 +75,6 @@
         nix
         opencode
       ];
-
-      shellHook = ''
-        if [ -z "$IN_NIX_ZSH" ]; then
-          export IN_NIX_ZSH=1
-          export SHELL=${pkgs.zsh}/bin/zsh
-          exec ${pkgs.zsh}/bin/zsh
-        fi
-      '';
     };
 
     nixosConfigurations = {
