@@ -11,7 +11,7 @@
     rust-analyzer
     # Go
     gopls
-    gotools # für gofumpt/goimports
+    (lib.lowPrio gotools) # für gofumpt/goimports
     # Typst
     tinymist
     # Java
