@@ -47,15 +47,22 @@ in {
         identityFile = "${sshPath}/huggingface";
         identitiesOnly = true;
       };
-      "swp" = {
-        hostname = "git.se.uni-hannover.de";
-        user = "git";
-        identityFile = "${sshPath}/swp";
+      "lab" = {
+        hostname = "lab.sra.uni-hannover.de";
+        user = "ric.taesler";
+        identityFile = "${sshPath}/lab";
         identitiesOnly = true;
       };
-      "swp-server" = {
-        hostname = "130.75.33.235";
-        user = "iits-1";
+      "lab-pc" = {
+        hostname = "lab-pc02";
+        user = "ric.taesler";
+        proxyJump = "lab";
+      };
+      "vbs" = {
+        hostname = "praktifix";
+        user = "user";
+        port = 2212;
+        proxyJump = "lab";
       };
     };
   };

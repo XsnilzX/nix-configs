@@ -44,11 +44,25 @@
       mode = "0600";
     };
 
-    "ssh_keys/swp_key/private" = {
+    "ssh_keys/lab/private" = {
       sopsFile = ../../secrets/nixhael.yaml;
       owner = config.users.users.xsnilzx.name;
-      path = "/home/xsnilzx/.ssh/swp";
+      path = "/home/xsnilzx/.ssh/lab";
       mode = "0600";
+    };
+
+    "luh-vpn-env" = {
+      sopsFile = ../../secrets/nixhael.yaml;
+      owner = "root";
+      group = "root";
+      mode = "0400";
+    };
+
+    "luh-vpn-password" = {
+      sopsFile = ../../secrets/nixhael.yaml;
+      owner = "root";
+      group = "root";
+      mode = "0400";
     };
 
     # Common tokens
